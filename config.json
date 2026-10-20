@@ -1,0 +1,245 @@
+{
+  "_readme": "Edit this file to customise the site. All text, dates, PIN, colours and lists live here. The letter body is intentionally NOT here — it's hardcoded inside index.html.",
+
+  "settings": {
+    "recipientName": "Riya",
+    "pin": "1911",
+    "pinHint": "tip: our little secret",
+    "songFile": "our-song.mp3",
+    "songStart": 0,
+    "launchDate": "2026-11-19T00:00:00+05:30",
+    "milestoneDate": "2026-11-19T00:00:00+05:30",
+    "testBypassEnabled": true
+  },
+
+  "theme": {
+    "bg":         "#0a0e1f",
+    "bg2":        "#0f1428",
+    "accent":     "#a99cff",
+    "accentDeep": "#7c6cf0",
+    "accentSoft": "#c8c0ff",
+    "accentPale": "#e0d9ff",
+    "sky":        "#6ba3ff",
+    "gold":       "#ffd89b",
+    "lavender":   "#d4b8ff",
+    "cream":      "#f0f0ff",
+    "text":       "#f0f0ff",
+    "muted":      "#a8a8c8",
+    "line":       "rgba(180,180,220,0.18)",
+    "lineHi":     "rgba(180,180,220,0.35)"
+  },
+
+  "timeLock": {
+    "moonIcon":     "🌙",
+    "eyebrow":      "a little patience, bestie",
+    "title":        "not yet, riya",
+    "subtitleHTML": "this was made just for you —<br>it opens on <strong>19 nov 2026 &middot; 00:00 IST</strong>",
+    "hint":         "come back when the sky is darkest ✨"
+  },
+
+  "pinLock": {
+    "heartIcon":  "💜",
+    "eyebrow":    "for riya, only",
+    "title":      "enter our code",
+    "subtitle":   "the date that means something",
+    "errorMsg":   "not quite, bestie — try again"
+  },
+
+  "hero": {
+    "moonIcon":     "🌙",
+    "eyebrow":      "a little something for you",
+    "preTitle":     "to my favorite human,",
+    "title":        "Riya",
+    "subtitleHTML": "you're the person I text first about everything. this is me, every word, every little thing — <em>for you</em>."
+  },
+
+  "ticker": {
+    "lines": [
+      "💜 to riya, my favorite human 💜",
+      "partner in crime",
+      "my person, always",
+      "the bestie of all besties",
+      "chaos coordinator",
+      "till the stars go out",
+      "you make life fun"
+    ]
+  },
+
+  "intro": {
+    "textHTML": "riya, there are <em>ten thousand reasons</em> why you're my favorite person — and somehow, every single one of them is the way you <em>laugh</em>."
+  },
+
+  "photos": {
+    "eyebrow":  "little pieces of us",
+    "title":    "our polaroids",
+    "subtitle": "tap any photo to see it larger. (swap the placeholders with our real ones — they'll fit perfectly.)",
+    "items": [
+      { "emoji": "🌷", "caption": "the first hello",   "rot": -3, "tape": 2 },
+      { "emoji": "☕", "caption": "that coffee day",   "rot": 2,  "tape": -3 },
+      { "emoji": "🌙", "caption": "late night talks",  "rot": -1, "tape": 4 },
+      { "emoji": "🎡", "caption": "the ferris wheel",  "rot": 3,  "tape": -2 },
+      { "emoji": "🌊", "caption": "by the sea",        "rot": -4, "tape": 3 },
+      { "emoji": "🍜", "caption": "noodles & laughs",  "rot": 1,  "tape": -4 },
+      { "emoji": "🌸", "caption": "cherry blossoms",   "rot": -2, "tape": 2 },
+      { "emoji": "✨", "caption": "just us",           "rot": 4,  "tape": -1 }
+    ]
+  },
+
+  "timeline": {
+    "eyebrow": "how we happened",
+    "title":   "our little timeline",
+    "items": [
+      { "date": "the first time",  "title": "the hello",       "desc": "you replied. and my whole chest rearranged itself around the sound of your name." },
+      { "date": "not long after",  "title": "the first laugh", "desc": "the one where we couldn't stop. the one I replay in my head when I can't sleep." },
+      { "date": "a little later",  "title": "the first 3am",   "desc": "just five more minutes turned into the sun coming up and neither of us wanting to hang up." },
+      { "date": "somewhere in it", "title": "the first fight", "desc": "the one I'd take back a thousand times. also — the day I realised you're not going anywhere." },
+      { "date": "the good middle", "title": "the first \"i got you\"", "desc": "quiet, terrifying, and the truest thing I've ever said." },
+      { "date": "right now",       "title": "still us",        "desc": "still choosing you. still going to. every single day." }
+    ]
+  },
+
+  "reasons": {
+    "eyebrow":     "i could keep going",
+    "title":       "reasons you're my favorite person",
+    "defaultText": "tap below, bestie — I'll tell you why",
+    "buttonText":  "give me a reason 💫",
+    "buttonDone":  "you've heard every one 💜",
+    "buttonAgain": "one more 💫",
+    "items": [
+      { "e": "💫", "t": "the way you laugh — careless and loud and completely yours" },
+      { "e": "🌷", "t": "how you always notice the small things I never say" },
+      { "e": "🌙", "t": "your voice on late-night calls — like someone lit a candle" },
+      { "e": "☕", "t": "the way you hold your cup when it's too warm" },
+      { "e": "🌊", "t": "you are soft where I am sharp, and sharp where I am soft" },
+      { "e": "🌸", "t": "how you say my name like it matters" },
+      { "e": "✨", "t": "the way your eyes go bright before you laugh" },
+      { "e": "💜", "t": "you remember the version of me everyone else forgot" },
+      { "e": "🎡", "t": "how even a dull day feels like something when you're in it" },
+      { "e": "🍜", "t": "the way you steal my food and pretend you didn't" },
+      { "e": "🌻", "t": "that little smile when you think I'm not looking" },
+      { "e": "🫶", "t": "you make me want to be better without ever asking me to be" },
+      { "e": "🌙", "t": "how you listen like the world can wait" },
+      { "e": "🪴", "t": "the way you look in the morning when you've just woken up" },
+      { "e": "🎶", "t": "you are my favorite song and my favorite silence" },
+      { "e": "🔥", "t": "your fire — the soft, steady kind that never burns out" },
+      { "e": "☁️", "t": "you feel like home without ever being a place" },
+      { "e": "🌷", "t": "the way you forgive me faster than I forgive myself" },
+      { "e": "💌", "t": "because you exist, honestly" },
+      { "e": "💜", "t": "and because being your friend is the easiest thing I do" }
+    ]
+  },
+
+  "openWhen": {
+    "eyebrow":  "for whenever you need me",
+    "title":    "open when…",
+    "subtitle": "tap each card when the feeling strikes",
+    "items": [
+      { "e": "🥺", "label": "open when", "title": "you miss me",             "body": "close your eyes. I'm holding your hand right now, right here, in this exact second. distance is only a rumour. 💜" },
+      { "e": "💧", "label": "open when", "title": "you're sad",               "body": "you don't have to be okay. you don't have to explain. just breathe. I'm here, and I'm not going anywhere." },
+      { "e": "🌙", "label": "open when", "title": "you can't sleep",          "body": "text me. I'll stay up with you. I'll be the 3am call, always." },
+      { "e": "😤", "label": "open when", "title": "you're mad at me",         "body": "I probably deserve it. I'm sorry. I'd rather be wrong and have you than right and far away." },
+      { "e": "💭", "label": "open when", "title": "you forget you matter",    "body": "scroll up. read the whole page again. every word here is me. every word is true." },
+      { "e": "😊", "label": "open when", "title": "you want to smile",        "body": "remember the ferris wheel? the noodles? the way you snorted when I said that dumb thing? — that. keep that." }
+    ]
+  },
+
+  "quiz": {
+    "eyebrow": "how well do you know us?",
+    "title":   "a tiny bestie quiz",
+    "items": [
+      { "q": "what's the first thing I noticed about you?",
+        "opts": ["your laugh", "your eyes", "your voice", "the way you said my name"],
+        "a": 2,
+        "ok": "your voice. it still gets me every time.",
+        "no": "close — but it was your voice. it always is." },
+      { "q": "what's my favorite time of day with you?",
+        "opts": ["morning", "afternoon", "late night", "all of it"],
+        "a": 3,
+        "ok": "all of it. obviously all of it.",
+        "no": "trick question — all of it." },
+      { "q": "what do I think about when I can't sleep?",
+        "opts": ["you", "you", "you", "you"],
+        "a": 0,
+        "ok": "every answer was right, bestie.",
+        "no": "…every answer was right." },
+      { "q": "how long have you been stuck with me?",
+        "opts": ["since the first hello", "since the first laugh", "since the first fight", "forever"],
+        "a": 3,
+        "ok": "forever. before, now, after.",
+        "no": "forever is the only real answer." },
+      { "q": "what would I trade for one more day with you?",
+        "opts": ["anything", "everything", "nothing — I already have you", "both b & c"],
+        "a": 3,
+        "ok": "both. always both.",
+        "no": "both, bestie. both." },
+      { "q": "what scares me the most?",
+        "opts": ["losing you", "never holding you", "a day without your laugh", "all three"],
+        "a": 3,
+        "ok": "all three. every single one.",
+        "no": "all three. don't make me pick." },
+      { "q": "what's the truest thing I can say?",
+        "opts": ["you're my person", "you're my favorite", "I'll always pick up", "all of them"],
+        "a": 3,
+        "ok": "all of them. every time. forever.",
+        "no": "all of them, riya. all of them." }
+    ]
+  },
+
+  "coupons": {
+    "eyebrow":  "no expiry, no excuses",
+    "title":    "bestie coupons",
+    "subtitle": "tap to claim — I'm honouring every single one",
+    "items": [
+      { "e": "🫂", "title": "one long, unhurried hug",       "sub": "valid any day, any mood" },
+      { "e": "🎬", "title": "movie night, your pick",        "sub": "I promise not to fall asleep" },
+      { "e": "🍳", "title": "breakfast cooked for you",      "sub": "redeemable on any lazy morning" },
+      { "e": "🧹", "title": "I do your least favorite chore","sub": "no complaints, no eye rolls" },
+      { "e": "🍿", "title": "surprise snack delivery",       "sub": "just say when" },
+      { "e": "☕", "title": "coffee brought to you",         "sub": "made exactly how you like it" },
+      { "e": "📞", "title": "one call, any hour",            "sub": "yes, even 3am" },
+      { "e": "💌", "title": "a handwritten letter",          "sub": "delivered by me, in person" }
+    ]
+  },
+
+  "scratch": {
+    "eyebrow": "scratch to reveal",
+    "title":   "a secret for you",
+    "emoji":   "💜",
+    "textHTML": "I knew the moment I met you —<br>you'd be someone I'd never want to lose.",
+    "hint":    "use your finger to scratch"
+  },
+
+  "letter": {
+    "top":    "a letter to you, riya",
+    "greet":  "my bestie,",
+    "sign":   "always — yours 💜",
+    "button": "💌 send a hug"
+  },
+
+  "constellation": {
+    "eyebrow":  "look up",
+    "title":    "our constellation",
+    "subtitle": "a sky drawn just for you — watch it connect",
+    "message":  "written in the stars — you and me"
+  },
+
+  "milestone": {
+    "eyebrow":   "until the next",
+    "title":     "counting down again",
+    "label":     "next bestie-versary",
+    "titleText": "19 november — riya's day",
+    "note":      "and I'll be right here the whole time"
+  },
+
+  "cake": {
+    "eyebrow":     "make it count",
+    "title":       "make a wish, bestie",
+    "defaultText": "close your eyes. make a wish. then tap the cake 🎂",
+    "blowText":    "wish locked in ✨ it's coming true, riya",
+    "relightText": "lit again ✨ make another one — you deserve them all"
+  },
+
+  "footer": {
+    "textHTML": "made with <span>💜</span> for <span>riya</span>, always"
+  }
+}
