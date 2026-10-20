@@ -94,7 +94,7 @@
   "reasons": {
     "eyebrow":     "i could keep going",
     "title":       "reasons you're my favorite person",
-    "defaultText": "tap below, bestie — I'll tell you why",
+    "defaultText": "tap below, ririri — I'll tell you why",
     "buttonText":  "give me a reason 💫",
     "buttonDone":  "you've heard every one 💜",
     "buttonAgain": "one more 💫",
@@ -145,7 +145,7 @@
       { "q": "what do I think about when I can't sleep?", "opts": ["you","you","you","you"], "a": 0, "ok": "every answer was right, bestie.", "no": "…every answer was right." },
       { "q": "how long have you been stuck with me?", "opts": ["since the first hello","since the first laugh","since the first fight","forever"], "a": 3, "ok": "forever. before, now, after.", "no": "forever is the only real answer." },
       { "q": "what would I trade for one more day with you?", "opts": ["anything","everything","nothing — I already have you","both b & c"], "a": 3, "ok": "both. always both.", "no": "both, bestie. both." },
-      { "q": "what scares me the most?", "opts": ["losing you","never holding you","a day without your laugh","all three"], "a": 3, "ok": "all three. every single one.", "no": "all three. don't make me pick." },
+      { "q": "what scares me the most?", "opts": ["losing you","never holding you","a day without uss","all three"], "a": 3, "ok": "all three. every single one.", "no": "all three. don't make me pick." },
       { "q": "what's the truest thing I can say?", "opts": ["you're my person","you're my favorite","I'll always pick up","all of them"], "a": 3, "ok": "all of them. every time. forever.", "no": "all of them, riya. all of them." }
     ]
   },
