@@ -5,8 +5,8 @@
     "recipientName": "Riya",
     "pin": "1911",
     "pinHint": "tip: our little secret",
-    "songFile": "our-song.mp3",
-    "songStart": 0,
+    "songFile": "Chaudhary.mp3",
+    "songStart": 70,
     "launchDate": "2026-11-19T00:00:00+05:30",
     "milestoneDate": "2026-11-19T00:00:00+05:30",
     "testBypassEnabled": true
@@ -188,7 +188,9 @@
     "items": [
       { "src": "vid1.mp4", "caption": "the first one", "poster": "" },
       { "src": "vid2.mp4", "caption": "number two",    "poster": "" },
-      { "src": "vid3.mp4", "caption": "and so on…",    "poster": "" }
+      { "src": "vid3.mp4", "caption": "and so on…",    "poster": "" },
+      { "src": "vid4.mp4", "caption": "usss…?",    "poster": "" },
+      { "src": "vid5.mp4", "caption": "and lastly…",    "poster": "" }
     ]
   },
 
