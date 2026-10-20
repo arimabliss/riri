@@ -5,7 +5,7 @@
     "recipientName": "Riya",
     "pin": "1911",
     "pinHint": "tip: our little secret",
-    "songFile": "song.mp3",
+    "songFile": "our-song.mp3",
     "songStart": 0,
     "launchDate": "2026-11-19T00:00:00+05:30",
     "milestoneDate": "2026-11-19T00:00:00+05:30",
@@ -70,11 +70,12 @@
   },
 
   "game": {
-    "eyebrow":  "take a break",
-    "title":    "our little arcade",
-    "subtitle": "made for you — see if you can beat my high score 💜",
-    "url":      "https://tutorialsandroid.github.io/sky-dash-game/",
-    "hint":     "click or tap inside the game to play"
+    "eyebrow":    "take a break",
+    "title":      "our little arcade",
+    "subtitle":   "made for you — see if you can beat my high score 💜",
+    "hint":       "tap play on the game — and tap ⛶ for fullscreen",
+    "creditText": "Play World Cricket Championship Lte",
+    "creditUrl":  "https://www.madkidgames.com/game/world-cricket-championship-lte"
   },
 
   "timeline": {
@@ -139,41 +140,13 @@
     "eyebrow": "how well do you know us?",
     "title":   "a tiny bestie quiz",
     "items": [
-      { "q": "what's the first thing I noticed about you?",
-        "opts": ["your laugh", "your eyes", "your voice", "the way you said my name"],
-        "a": 2,
-        "ok": "your voice. it still gets me every time.",
-        "no": "close — but it was your voice. it always is." },
-      { "q": "what's my favorite time of day with you?",
-        "opts": ["morning", "afternoon", "late night", "all of it"],
-        "a": 3,
-        "ok": "all of it. obviously all of it.",
-        "no": "trick question — all of it." },
-      { "q": "what do I think about when I can't sleep?",
-        "opts": ["you", "you", "you", "you"],
-        "a": 0,
-        "ok": "every answer was right, bestie.",
-        "no": "…every answer was right." },
-      { "q": "how long have you been stuck with me?",
-        "opts": ["since the first hello", "since the first laugh", "since the first fight", "forever"],
-        "a": 3,
-        "ok": "forever. before, now, after.",
-        "no": "forever is the only real answer." },
-      { "q": "what would I trade for one more day with you?",
-        "opts": ["anything", "everything", "nothing — I already have you", "both b & c"],
-        "a": 3,
-        "ok": "both. always both.",
-        "no": "both, bestie. both." },
-      { "q": "what scares me the most?",
-        "opts": ["losing you", "never holding you", "a day without your laugh", "all three"],
-        "a": 3,
-        "ok": "all three. every single one.",
-        "no": "all three. don't make me pick." },
-      { "q": "what's the truest thing I can say?",
-        "opts": ["you're my person", "you're my favorite", "I'll always pick up", "all of them"],
-        "a": 3,
-        "ok": "all of them. every time. forever.",
-        "no": "all of them, riya. all of them." }
+      { "q": "what's the first thing I noticed about you?", "opts": ["your laugh","your eyes","your voice","the way you said my name"], "a": 2, "ok": "your voice. it still gets me every time.", "no": "close — but it was your voice. it always is." },
+      { "q": "what's my favorite time of day with you?", "opts": ["morning","afternoon","late night","all of it"], "a": 3, "ok": "all of it. obviously all of it.", "no": "trick question — all of it." },
+      { "q": "what do I think about when I can't sleep?", "opts": ["you","you","you","you"], "a": 0, "ok": "every answer was right, bestie.", "no": "…every answer was right." },
+      { "q": "how long have you been stuck with me?", "opts": ["since the first hello","since the first laugh","since the first fight","forever"], "a": 3, "ok": "forever. before, now, after.", "no": "forever is the only real answer." },
+      { "q": "what would I trade for one more day with you?", "opts": ["anything","everything","nothing — I already have you","both b & c"], "a": 3, "ok": "both. always both.", "no": "both, bestie. both." },
+      { "q": "what scares me the most?", "opts": ["losing you","never holding you","a day without your laugh","all three"], "a": 3, "ok": "all three. every single one.", "no": "all three. don't make me pick." },
+      { "q": "what's the truest thing I can say?", "opts": ["you're my person","you're my favorite","I'll always pick up","all of them"], "a": 3, "ok": "all of them. every time. forever.", "no": "all of them, riya. all of them." }
     ]
   },
 
@@ -182,14 +155,14 @@
     "title":    "bestie coupons",
     "subtitle": "tap to claim — I'm honouring every single one",
     "items": [
-      { "e": "🫂", "title": "one long, unhurried hug",        "sub": "valid any day, any mood" },
-      { "e": "🎬", "title": "movie night, your pick",         "sub": "I promise not to fall asleep" },
-      { "e": "🍳", "title": "breakfast cooked for you",       "sub": "redeemable on any lazy morning" },
+      { "e": "🫂", "title": "one long, unhurried hug", "sub": "valid any day, any mood" },
+      { "e": "🎬", "title": "movie night, your pick", "sub": "I promise not to fall asleep" },
+      { "e": "🍳", "title": "breakfast cooked for you", "sub": "redeemable on any lazy morning" },
       { "e": "🧹", "title": "I do your least favorite chore", "sub": "no complaints, no eye rolls" },
-      { "e": "🍿", "title": "surprise snack delivery",        "sub": "just say when" },
-      { "e": "☕", "title": "coffee brought to you",          "sub": "made exactly how you like it" },
-      { "e": "📞", "title": "one call, any hour",             "sub": "yes, even 3am" },
-      { "e": "💌", "title": "a handwritten letter",           "sub": "delivered by me, in person" }
+      { "e": "🍿", "title": "surprise snack delivery", "sub": "just say when" },
+      { "e": "☕", "title": "coffee brought to you", "sub": "made exactly how you like it" },
+      { "e": "📞", "title": "one call, any hour", "sub": "yes, even 3am" },
+      { "e": "💌", "title": "a handwritten letter", "sub": "delivered by me, in person" }
     ]
   },
 
@@ -211,7 +184,7 @@
   "reels": {
     "eyebrow":  "little moments",
     "title":    "our reels",
-    "subtitle": "swipe, use the arrows, or tap the dots — press play on any of them",
+    "subtitle": "swipe or use the arrows — tap the sound icon to mute or unmute",
     "items": [
       { "src": "vid1.mp4", "caption": "the first one", "poster": "" },
       { "src": "vid2.mp4", "caption": "number two",    "poster": "" },
