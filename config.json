@@ -140,7 +140,7 @@
     "eyebrow": "how well do you know us?",
     "title":   "a tiny bestie quiz",
     "items": [
-      { "q": "what's the first thing I noticed about you?", "opts": ["your laugh","your eyes","your voice","the way you said my name"], "a": 2, "ok": "your voice. it still gets me every time.", "no": "close — but it was your voice. it always is." },
+      { "q": "what's the first thing I noticed about you?", "opts": ["your laugh","your eyes","your voice","the way you said my name"], "a": 3, "ok": "your voice. it still gets me every time.", "no": "close — but it was your voice. it always is." },
       { "q": "what's my favorite time of day with you?", "opts": ["morning","afternoon","late night","all of it"], "a": 3, "ok": "all of it. obviously all of it.", "no": "trick question — all of it." },
       { "q": "what do I think about when I can't sleep?", "opts": ["you","you","you","you"], "a": 0, "ok": "every answer was right, bestie.", "no": "…every answer was right." },
       { "q": "how long have you been stuck with me?", "opts": ["since the first hello","since the first laugh","since the first fight","forever"], "a": 3, "ok": "forever. before, now, after.", "no": "forever is the only real answer." },
