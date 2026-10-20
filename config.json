@@ -152,7 +152,7 @@
 
   "coupons": {
     "eyebrow":  "no expiry, no excuses",
-    "title":    "bestie coupons",
+    "title":    "coupons/tickets",
     "subtitle": "tap to claim — I'm honouring every single one",
     "items": [
       { "e": "🫂", "title": "one long, unhurried hug", "sub": "valid any day, any mood" },
@@ -197,8 +197,8 @@
   "milestone": {
     "eyebrow":   "until the big day",
     "title":     "counting down to your birthday",
-    "label":     "riya's birthday",
-    "titleText": "19 november — happy birthday, riya!",
+    "label":     "riru's birthday",
+    "titleText": "19 november — happy birthday, ririii!",
     "note":      "and I'll be right here to celebrate you"
   },
 
@@ -211,6 +211,6 @@
   },
 
   "footer": {
-    "textHTML": "made with <span>💜</span> for <span>riya</span>, always"
+    "textHTML": "made with <span>💜</span> for <span>my SoulMate ~ riri</span>, always"
   }
 }
