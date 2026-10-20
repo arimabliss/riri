@@ -48,14 +48,14 @@
   "hero": {
     "moonIcon":     "🌙",
     "eyebrow":      "a little something for you",
-    "preTitle":     "to my favorite human,",
+    "preTitle":     "to my favorite person,",
     "title":        "Riya",
-    "subtitleHTML": "you're the person I text first about everything. this is me, every word, every little thing — <em>for you</em>."
+    "subtitleHTML": "you're the person I text first about everything. this is me, every word, every little thing ~ <em>for you</em>."
   },
 
   "ticker": {
     "lines": [
-      "💜 to riya, my favorite human 💜",
+      "💜 to riya, my favorite personn 💜",
       "partner in crime",
       "my person, always",
       "the bestie of all besties",
@@ -66,7 +66,7 @@
   },
 
   "intro": {
-    "textHTML": "riya, there are <em>ten thousand reasons</em> why you're my favorite person — and somehow, every single one of them is the way you <em>laugh</em>."
+    "textHTML": "riri ji, there are <em>ten thousand reasons</em> why you're my favorite person — and somehow, the biggest reason is <em>how same we are!! (SOULMATES)</em>."
   },
 
   "game": {
@@ -74,8 +74,8 @@
     "title":      "our little arcade",
     "subtitle":   "made for you — see if you can beat my high score 💜",
     "hint":       "tap play on the game — and tap ⛶ for fullscreen",
-    "creditText": "Play World Cricket Championship Lte",
-    "creditUrl":  "https://www.madkidgames.com/game/world-cricket-championship-lte"
+    "creditText": "Play our favourite cricket game",
+    "creditUrl":  "WCC 3 built by aarav (lite version)"
   },
 
   "timeline": {
