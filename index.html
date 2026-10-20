@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0a0e1f">
 <meta name="description" content="A little something, for Riya.">
@@ -455,8 +458,6 @@ section{ margin-bottom:110px; position:relative; }
   color:var(--accent);
   border-color:var(--accent);
 }
-
-/* Fullscreen game styles */
 .game-frame:fullscreen,
 .game-frame:-webkit-full-screen{
   max-height:none;
@@ -804,18 +805,12 @@ section{ margin-bottom:110px; position:relative; }
 }
 .reels-sound:hover{ background:rgba(124,108,240,0.92); border-color:var(--accent); }
 .reels-sound:active{ transform:scale(0.9); }
-
-/* Pulsing ring on sound button when autoplay was blocked */
 .reels-sound.blocked{
   animation: soundBlocked 1.6s ease-in-out infinite;
 }
 @keyframes soundBlocked{
-  0%,100%{
-    box-shadow: 0 6px 20px rgba(0,0,0,0.45), 0 0 0 0 rgba(255,216,155,0.55);
-  }
-  50%{
-    box-shadow: 0 6px 20px rgba(0,0,0,0.45), 0 0 0 10px rgba(255,216,155,0);
-  }
+  0%,100%{ box-shadow: 0 6px 20px rgba(0,0,0,0.45), 0 0 0 0 rgba(255,216,155,0.55); }
+  50%    { box-shadow: 0 6px 20px rgba(0,0,0,0.45), 0 0 0 10px rgba(255,216,155,0); }
 }
 
 .reels-progress{
@@ -1104,6 +1099,7 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
                 loading="lazy"
                 allow="autoplay; fullscreen; gamepad"
                 allowfullscreen
+                scrolling="no"
                 referrerpolicy="no-referrer-when-downgrade"
                 title="World Cricket Championship Lte"></iframe>
         <button class="game-fullscreen" id="gameFullscreen" aria-label="Fullscreen" title="Fullscreen">⛶</button>
@@ -1116,6 +1112,9 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
            rel="noopener noreferrer"
            data-cfg="game.creditText">Play World Cricket Championship Lte</a>
       </p>
+      <noscript>
+        <p style="text-align:center;font-size:13px;"><a href="https://www.madkidgames.com/game/world-cricket-championship-lte">Play World Cricket Championship Lte</a></p>
+      </noscript>
     </div>
   </section>
 
@@ -1315,9 +1314,7 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
     "eyebrow": "take a break",
     "title": "our little arcade",
     "subtitle": "made for you — see if you can beat my high score 💜",
-    "url": "https://www.madkidgames.com/full/world-cricket-championship-lte",
     "hint": "tap play on the game — and tap ⛶ for fullscreen",
-    "aspect": "16/9",
     "creditText": "Play World Cricket Championship Lte",
     "creditUrl": "https://www.madkidgames.com/game/world-cricket-championship-lte"
   },
@@ -1417,7 +1414,7 @@ let CONFIG = null;
 
 async function loadConfig(){
   try {
-    const res = await fetch('config.json', { cache: 'no-store' });
+    const res = await fetch('config.json?t=' + Date.now(), { cache: 'no-store' });
     if(res.ok) return await res.json();
   } catch(e){ }
   const fb = document.getElementById('config-fallback');
@@ -2089,8 +2086,7 @@ function initGameFullscreen(){
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   REELS — sound UNMUTED by default. Sound preference no longer
-   permanently flipped when autoplay is temporarily blocked.
+   REELS — unmuted by default, sound preference never permanently flipped
    ═══════════════════════════════════════════════════════════════════════ */
 function buildReels(){
   const wrap         = document.querySelector('.reels-wrap');
@@ -2107,7 +2103,6 @@ function buildReels(){
   const items = (CONFIG.reels && CONFIG.reels.items) || [];
   if(!items.length){ if(wrap) wrap.style.display = 'none'; return; }
 
-  // Videos created WITHOUT muted attribute → unmuted by default
   track.innerHTML = items.map(r => {
     const hasSrc = r.src && String(r.src).trim();
     if(hasSrc){
@@ -2128,8 +2123,6 @@ function buildReels(){
   const videos = Array.from(track.querySelectorAll('video'));
   let cur = 0;
 
-  /* userWantsSound = the user's PREFERENCE (true = wants audio).
-     This never gets flipped by the autoplay fallback. */
   let userWantsSound = true;
   let songWasPlayingBeforeReel = false;
 
@@ -2168,22 +2161,15 @@ function buildReels(){
     const isMuted = v ? v.muted : !userWantsSound;
     soundBtn.textContent = isMuted ? '🔇' : '🔊';
     soundBtn.setAttribute('aria-label', isMuted ? 'Unmute reels' : 'Mute reels');
-    // If user WANTS sound but it's blocked, pulse the icon to invite a tap
-    if(isMuted && userWantsSound){
-      soundBtn.classList.add('blocked');
-    } else {
-      soundBtn.classList.remove('blocked');
-    }
+    if(isMuted && userWantsSound) soundBtn.classList.add('blocked');
+    else soundBtn.classList.remove('blocked');
   }
 
   function tryPlay(v){
-    // Respect user preference
     v.muted = !userWantsSound;
     const p = v.play();
     if(p && p.catch){
       p.catch((err) => {
-        // Autoplay-with-sound blocked. Mute THIS video so it can still play,
-        // but do NOT change the user's preference.
         if(err.name === 'NotAllowedError' && userWantsSound){
           v.muted = true;
           updateSoundIcon();
@@ -2219,35 +2205,24 @@ function buildReels(){
       }, 120);
     }
     videos.forEach((v, k) => {
-      if(k === cur){
-        tryPlay(v);
-      } else {
-        v.pause();
-        try { v.currentTime = 0; } catch(e){}
-      }
+      if(k === cur){ tryPlay(v); }
+      else { v.pause(); try { v.currentTime = 0; } catch(e){} }
     });
     syncSongWithReel();
     updateSoundIcon();
     updateProgress();
   }
 
-  /* Sound button: toggle based on the CURRENT actual state */
   if(soundBtn){
     soundBtn.addEventListener('click', e => {
       e.stopPropagation();
       const v = videos[cur];
       if(!v) return;
-
       const wasMuted = v.muted;
-      userWantsSound = wasMuted;      // if was muted → user wants sound now
-      v.muted = !userWantsSound;      // apply
-
+      userWantsSound = wasMuted;
+      v.muted = !userWantsSound;
       SFX.tap(); haptic(10);
-
-      if(!v.muted && v.paused){
-        // Fresh gesture just unlocked sound — retry play
-        v.play().catch(() => {});
-      }
+      if(!v.muted && v.paused) v.play().catch(() => {});
       updateSoundIcon();
       syncSongWithReel();
     });
@@ -2264,8 +2239,6 @@ function buildReels(){
        e.target.closest('.reels-sound')) return;
     const v = videos[cur];
     if(!v) return;
-
-    // If the video is muted but user wants sound, unmute + play (fresh gesture)
     if(v.muted && userWantsSound){
       v.muted = false;
       if(v.paused) v.play().catch(() => {});
@@ -2273,7 +2246,6 @@ function buildReels(){
       syncSongWithReel();
       return;
     }
-
     if(v.paused) v.play().catch(() => {});
     else v.pause();
   });
@@ -2702,9 +2674,11 @@ function initTimeLock(){
     interactive = true;
     update();
     interval = setInterval(update, 1000);
-    try{ Starfield.start(); }catch(e){}
+    try{ StarField_startSafe(); }catch(e){}
   }
 }
+
+function StarField_startSafe(){ try{ Starfield.start(); }catch(e){} }
 
 (async function boot(){
   CONFIG = await loadConfig();
@@ -2719,14 +2693,10 @@ function initTimeLock(){
     if(CONFIG.settings.songFile) song.src = CONFIG.settings.songFile;
   }
 
-  if(CONFIG.game && CONFIG.game.url){
-    const iframe = $('gameIframe');
-    if(iframe) iframe.src = CONFIG.game.url;
-  }
-  if(CONFIG.game && CONFIG.game.aspect){
-    const frame = document.querySelector('.game-frame');
-    if(frame) frame.style.aspectRatio = CONFIG.game.aspect;
-  }
+  /* 🔒 The game iframe src is HARDCODED in HTML — we DO NOT override it
+     from config here. That was the previous bug which let a stale
+     config.json force the site back to SkyDash. */
+
   if(CONFIG.game && CONFIG.game.creditUrl){
     const a = $('gameCreditLink');
     if(a) a.href = CONFIG.game.creditUrl;
