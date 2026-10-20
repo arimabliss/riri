@@ -5,7 +5,7 @@
     "recipientName": "Riya",
     "pin": "1911",
     "pinHint": "tip: our little secret",
-    "songFile": "our-song.mp3",
+    "songFile": "song.mp3",
     "songStart": 0,
     "launchDate": "2026-11-19T00:00:00+05:30",
     "milestoneDate": "2026-11-19T00:00:00+05:30",
@@ -69,20 +69,12 @@
     "textHTML": "riya, there are <em>ten thousand reasons</em> why you're my favorite person — and somehow, every single one of them is the way you <em>laugh</em>."
   },
 
-  "photos": {
-    "eyebrow":  "little pieces of us",
-    "title":    "our polaroids",
-    "subtitle": "tap any photo to see it larger. (swap the placeholders with our real ones — they'll fit perfectly.)",
-    "items": [
-      { "emoji": "🌷", "caption": "the first hello",   "rot": -3, "tape": 2 },
-      { "emoji": "☕", "caption": "that coffee day",   "rot": 2,  "tape": -3 },
-      { "emoji": "🌙", "caption": "late night talks",  "rot": -1, "tape": 4 },
-      { "emoji": "🎡", "caption": "the ferris wheel",  "rot": 3,  "tape": -2 },
-      { "emoji": "🌊", "caption": "by the sea",        "rot": -4, "tape": 3 },
-      { "emoji": "🍜", "caption": "noodles & laughs",  "rot": 1,  "tape": -4 },
-      { "emoji": "🌸", "caption": "cherry blossoms",   "rot": -2, "tape": 2 },
-      { "emoji": "✨", "caption": "just us",           "rot": 4,  "tape": -1 }
-    ]
+  "game": {
+    "eyebrow":  "take a break",
+    "title":    "our little arcade",
+    "subtitle": "made for you — see if you can beat my high score 💜",
+    "url":      "https://tutorialsandroid.github.io/sky-dash-game/",
+    "hint":     "click or tap inside the game to play"
   },
 
   "timeline": {
@@ -190,23 +182,23 @@
     "title":    "bestie coupons",
     "subtitle": "tap to claim — I'm honouring every single one",
     "items": [
-      { "e": "🫂", "title": "one long, unhurried hug",       "sub": "valid any day, any mood" },
-      { "e": "🎬", "title": "movie night, your pick",        "sub": "I promise not to fall asleep" },
-      { "e": "🍳", "title": "breakfast cooked for you",      "sub": "redeemable on any lazy morning" },
-      { "e": "🧹", "title": "I do your least favorite chore","sub": "no complaints, no eye rolls" },
-      { "e": "🍿", "title": "surprise snack delivery",       "sub": "just say when" },
-      { "e": "☕", "title": "coffee brought to you",         "sub": "made exactly how you like it" },
-      { "e": "📞", "title": "one call, any hour",            "sub": "yes, even 3am" },
-      { "e": "💌", "title": "a handwritten letter",          "sub": "delivered by me, in person" }
+      { "e": "🫂", "title": "one long, unhurried hug",        "sub": "valid any day, any mood" },
+      { "e": "🎬", "title": "movie night, your pick",         "sub": "I promise not to fall asleep" },
+      { "e": "🍳", "title": "breakfast cooked for you",       "sub": "redeemable on any lazy morning" },
+      { "e": "🧹", "title": "I do your least favorite chore", "sub": "no complaints, no eye rolls" },
+      { "e": "🍿", "title": "surprise snack delivery",        "sub": "just say when" },
+      { "e": "☕", "title": "coffee brought to you",          "sub": "made exactly how you like it" },
+      { "e": "📞", "title": "one call, any hour",             "sub": "yes, even 3am" },
+      { "e": "💌", "title": "a handwritten letter",           "sub": "delivered by me, in person" }
     ]
   },
 
   "scratch": {
-    "eyebrow": "scratch to reveal",
-    "title":   "a secret for you",
-    "emoji":   "💜",
+    "eyebrow":  "scratch to reveal",
+    "title":    "a secret for you",
+    "emoji":    "💜",
     "textHTML": "I knew the moment I met you —<br>you'd be someone I'd never want to lose.",
-    "hint":    "use your finger to scratch"
+    "hint":     "use your finger to scratch"
   },
 
   "letter": {
@@ -216,19 +208,23 @@
     "button": "💌 send a hug"
   },
 
-  "constellation": {
-    "eyebrow":  "look up",
-    "title":    "our constellation",
-    "subtitle": "a sky drawn just for you — watch it connect",
-    "message":  "written in the stars — you and me"
+  "reels": {
+    "eyebrow":  "little moments",
+    "title":    "our reels",
+    "subtitle": "swipe, use the arrows, or tap the dots — press play on any of them",
+    "items": [
+      { "src": "vid1.mp4", "caption": "the first one", "poster": "" },
+      { "src": "vid2.mp4", "caption": "number two",    "poster": "" },
+      { "src": "vid3.mp4", "caption": "and so on…",    "poster": "" }
+    ]
   },
 
   "milestone": {
-    "eyebrow":   "until the next",
-    "title":     "counting down again",
-    "label":     "next bestie-versary",
-    "titleText": "19 november — riya's day",
-    "note":      "and I'll be right here the whole time"
+    "eyebrow":   "until the big day",
+    "title":     "counting down to your birthday",
+    "label":     "riya's birthday",
+    "titleText": "19 november — happy birthday, riya!",
+    "note":      "and I'll be right here to celebrate you"
   },
 
   "cake": {
