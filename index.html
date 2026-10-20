@@ -705,11 +705,17 @@ section{ margin-bottom:110px; position:relative; }
 .kiss-btn.in-view{ opacity:1; }
 .kiss-btn:active{ transform:scale(0.94); box-shadow:0 6px 18px rgba(124,108,240,0.55); }
 
-/* REELS */
-.reels-wrap{ max-width:420px; margin:0 auto; position:relative; }
+/* ═══════════════════════════════════════════════════════════════════════
+   REELS — natural aspect ratio, no forced cropping
+   ═══════════════════════════════════════════════════════════════════════ */
+.reels-wrap{
+  max-width:min(520px, 94vw);
+  margin:0 auto;
+  position:relative;
+}
 .reels-viewport{
   position:relative;
-  aspect-ratio:9/16;
+  width:100%;
   border-radius:24px;
   overflow:hidden;
   background:#000;
@@ -718,34 +724,42 @@ section{ margin-bottom:110px; position:relative; }
   touch-action:pan-y;
 }
 .reels-track{
-  display:flex;
-  height:100%;
-  transition:transform .6s var(--ease-spring);
-  will-change:transform;
+  display:block;
+  width:100%;
 }
 .reel-slide{
-  flex:0 0 100%;
+  display:none;
   width:100%;
-  height:100%;
-  position:relative;
   background:#000;
-  overflow:hidden;
+  position:relative;
+  text-align:center;
+}
+.reel-slide.active{
+  display:block;
+  animation:reelFadeIn .35s ease;
+}
+@keyframes reelFadeIn{
+  from{ opacity:0.35; }
+  to{ opacity:1; }
 }
 .reel-slide video,
 .reel-slide img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+  max-width:100%;
+  max-height:82vh;
+  width:auto;
+  height:auto;
+  margin:0 auto;
   display:block;
+  background:#000;
 }
 .reel-slide video::-webkit-media-controls{ display:none; }
 
 .reel-placeholder{
+  min-height:440px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  width:100%; height:100%;
   text-align:center;
   padding:30px;
   background:
@@ -977,7 +991,7 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
   .ms-unit{ min-width:54px; padding:12px 6px; }
   .ms-num{ font-size:24px; }
   .coupon{ padding:18px 20px; }
-  .reels-wrap{ max-width:min(340px, 88vw); }
+  .reels-wrap{ max-width:min(440px, 96vw); }
   .reels-btn{ width:44px; height:44px; font-size:24px; }
   .reels-prev{ left:8px; }
   .reels-next{ right:8px; }
@@ -985,6 +999,9 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
   .reels-caption{ font-size:18px; }
   .reel-ph-emoji{ font-size:44px; }
   .reel-ph-text{ font-size:20px; }
+  .reel-placeholder{ min-height:360px; }
+  .reel-slide video,
+  .reel-slide img{ max-height:70vh; }
 }
 @media (max-width: 380px){
   .lock-card{ padding:32px 18px 22px; }
@@ -2086,7 +2103,7 @@ function initGameFullscreen(){
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   REELS — unmuted by default, sound preference never permanently flipped
+   REELS — each reel displays at its own native aspect ratio
    ═══════════════════════════════════════════════════════════════════════ */
 function buildReels(){
   const wrap         = document.querySelector('.reels-wrap');
@@ -2120,6 +2137,7 @@ function buildReels(){
     '</div>';
   }).join('');
 
+  const slides = Array.from(track.querySelectorAll('.reel-slide'));
   const videos = Array.from(track.querySelectorAll('video'));
   let cur = 0;
 
@@ -2193,7 +2211,11 @@ function buildReels(){
     if(i < 0) i = 0;
     if(i >= items.length) i = items.length - 1;
     cur = i;
-    track.style.transform = 'translateX(' + (-cur * 100) + '%)';
+
+    /* Each slide uses display: none/block so the viewport sizes to the
+       current video's natural aspect ratio — nothing forced or cropped. */
+    slides.forEach((s, k) => s.classList.toggle('active', k === cur));
+
     dots.forEach((d, k) => d.classList.toggle('active', k === cur));
     if(prev) prev.disabled = cur === 0;
     if(next) next.disabled = cur === items.length - 1;
@@ -2674,11 +2696,9 @@ function initTimeLock(){
     interactive = true;
     update();
     interval = setInterval(update, 1000);
-    try{ StarField_startSafe(); }catch(e){}
+    try{ Starfield.start(); }catch(e){}
   }
 }
-
-function StarField_startSafe(){ try{ Starfield.start(); }catch(e){} }
 
 (async function boot(){
   CONFIG = await loadConfig();
@@ -2692,10 +2712,6 @@ function StarField_startSafe(){ try{ Starfield.start(); }catch(e){} }
     MILESTONE_DATE = CONFIG.settings.milestoneDate || MILESTONE_DATE;
     if(CONFIG.settings.songFile) song.src = CONFIG.settings.songFile;
   }
-
-  /* 🔒 The game iframe src is HARDCODED in HTML — we DO NOT override it
-     from config here. That was the previous bug which let a stale
-     config.json force the site back to SkyDash. */
 
   if(CONFIG.game && CONFIG.game.creditUrl){
     const a = $('gameCreditLink');
