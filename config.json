@@ -2,7 +2,7 @@
   "_readme": "Edit this file to customise the site. All text, dates, PIN, colours and lists live here. The letter body is intentionally NOT here — it's hardcoded inside index.html.",
 
   "settings": {
-    "recipientName": "Riya",
+    "recipientName": "RiRI",
     "pin": "1911",
     "pinHint": "tip: our little secret",
     "songFile": "Chaudhary.mp3",
@@ -32,7 +32,7 @@
   "timeLock": {
     "moonIcon":     "🌙",
     "eyebrow":      "a little patience, bestie",
-    "title":        "not yet, riya",
+    "title":        "not yet, riri",
     "subtitleHTML": "this was made just for you —<br>it opens on <strong>19 nov 2026 &middot; 00:00 IST</strong>",
     "hint":         "come back when the sky is darkest ✨"
   },
@@ -49,13 +49,13 @@
     "moonIcon":     "🌙",
     "eyebrow":      "a little something for you",
     "preTitle":     "to my favorite person,",
-    "title":        "Riya",
+    "title":        "RiRi",
     "subtitleHTML": "you're the person I text first about everything. this is me, every word, every little thing ~ <em>for you</em>."
   },
 
   "ticker": {
     "lines": [
-      "💜 to riya, my favorite personn 💜",
+      "💜 to ruiaa, my favorite personn 💜",
       "partner in crime",
       "my person, always",
       "the bestie of all besties",
