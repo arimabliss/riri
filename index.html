@@ -380,6 +380,7 @@ section{ margin-bottom:110px; position:relative; }
 .typing-caret{ display:inline-block; width:2px; height:1.05em; background:var(--accent); margin-left:2px; vertical-align:middle; animation:caretBlink 1s steps(2) infinite; }
 @keyframes caretBlink{ 0%,50%{ opacity:1; } 51%,100%{ opacity:0; } }
 
+/* GAME */
 .game-wrap{ max-width:min(760px, 94vw); margin:0 auto; }
 .game-frame{
   position:relative;
@@ -404,6 +405,32 @@ section{ margin-bottom:110px; position:relative; }
   display:block;
   background:#0a0e1f;
 }
+.game-fullscreen{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  z-index:3;
+  border:1px solid rgba(255,255,255,0.28);
+  background:rgba(15,20,40,0.78);
+  color:#fff;
+  font-size:20px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:all .2s var(--ease);
+  touch-action:manipulation;
+  box-shadow:0 6px 20px rgba(0,0,0,0.45);
+}
+@media (hover:hover){
+  .game-fullscreen:hover{ background:rgba(124,108,240,0.92); border-color:var(--accent); }
+}
+.game-fullscreen:active{ transform:scale(0.9); }
 .game-hint{
   text-align:center;
   margin-top:16px;
@@ -411,6 +438,42 @@ section{ margin-bottom:110px; position:relative; }
   letter-spacing:0.16em;
   text-transform:uppercase;
   color:var(--muted);
+}
+.game-credit{
+  text-align:center;
+  margin-top:10px;
+  font-size:12px;
+  color:var(--muted);
+}
+.game-credit a{
+  color:var(--accent-soft);
+  text-decoration:none;
+  border-bottom:1px solid rgba(200,192,255,0.3);
+  transition:all .2s ease;
+}
+.game-credit a:hover{
+  color:var(--accent);
+  border-color:var(--accent);
+}
+
+/* Fullscreen game styles */
+.game-frame:fullscreen,
+.game-frame:-webkit-full-screen{
+  max-height:none;
+  width:100vw;
+  height:100vh;
+  aspect-ratio:auto;
+  border-radius:0;
+  border:none;
+}
+.game-frame:fullscreen iframe,
+.game-frame:-webkit-full-screen iframe{
+  width:100%;
+  height:100%;
+}
+.game-frame:fullscreen .game-fullscreen,
+.game-frame:-webkit-full-screen .game-fullscreen{
+  display:none;
 }
 
 .timeline{ max-width:600px; margin:0 auto; position:relative; padding-left:36px; }
@@ -742,6 +805,19 @@ section{ margin-bottom:110px; position:relative; }
 .reels-sound:hover{ background:rgba(124,108,240,0.92); border-color:var(--accent); }
 .reels-sound:active{ transform:scale(0.9); }
 
+/* Pulsing ring on sound button when autoplay was blocked */
+.reels-sound.blocked{
+  animation: soundBlocked 1.6s ease-in-out infinite;
+}
+@keyframes soundBlocked{
+  0%,100%{
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45), 0 0 0 0 rgba(255,216,155,0.55);
+  }
+  50%{
+    box-shadow: 0 6px 20px rgba(0,0,0,0.45), 0 0 0 10px rgba(255,216,155,0);
+  }
+}
+
 .reels-progress{
   position:absolute;
   bottom:0; left:0; right:0;
@@ -886,6 +962,7 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
   .lock-card{ padding:38px 22px 26px; }
   .lock-title{ font-size:30px; }
   .game-wrap{ max-width:min(560px, 96vw); }
+  .game-fullscreen{ width:38px; height:38px; font-size:17px; top:10px; right:10px; }
   .timeline{ padding-left:32px; }
   .open-when-grid{ grid-template-columns:repeat(2, 1fr); gap:12px; }
   .ow-card{ height:170px; }
@@ -1021,15 +1098,24 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
       <p class="section-sub" data-cfg="game.subtitle">made for you — see if you can beat my high score 💜</p>
     </div>
     <div class="game-wrap reveal">
-      <div class="game-frame">
+      <div class="game-frame" id="gameFrame">
         <iframe id="gameIframe"
-                src="https://mohitkhyalia1.github.io/Dino-game/"
+                src="https://www.madkidgames.com/full/world-cricket-championship-lte"
                 loading="lazy"
                 allow="autoplay; fullscreen; gamepad"
                 allowfullscreen
-                title="Dino Game"></iframe>
+                referrerpolicy="no-referrer-when-downgrade"
+                title="World Cricket Championship Lte"></iframe>
+        <button class="game-fullscreen" id="gameFullscreen" aria-label="Fullscreen" title="Fullscreen">⛶</button>
       </div>
-      <div class="game-hint" data-cfg="game.hint">tap or press space to jump</div>
+      <div class="game-hint" data-cfg="game.hint">tap play on the game — and tap ⛶ for fullscreen</div>
+      <p class="game-credit">
+        <a id="gameCreditLink"
+           href="https://www.madkidgames.com/game/world-cricket-championship-lte"
+           target="_blank"
+           rel="noopener noreferrer"
+           data-cfg="game.creditText">Play World Cricket Championship Lte</a>
+      </p>
     </div>
   </section>
 
@@ -1225,7 +1311,16 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
   "hero": { "moonIcon": "🌙", "eyebrow": "a little something for you", "preTitle": "to my favorite human,", "title": "Riya", "subtitleHTML": "you're the person I text first about everything. this is me, every word, every little thing — <em>for you</em>." },
   "ticker": { "lines": ["💜 to riya, my favorite human 💜","partner in crime","my person, always","the bestie of all besties","chaos coordinator","till the stars go out","you make life fun"] },
   "intro": { "textHTML": "riya, there are <em>ten thousand reasons</em> why you're my favorite person — and somehow, every single one of them is the way you <em>laugh</em>." },
-  "game": { "eyebrow": "take a break", "title": "our little arcade", "subtitle": "made for you — see if you can beat my high score 💜", "url": "https://mohitkhyalia1.github.io/Dino-game/", "hint": "tap or press space to jump", "aspect": "16/9" },
+  "game": {
+    "eyebrow": "take a break",
+    "title": "our little arcade",
+    "subtitle": "made for you — see if you can beat my high score 💜",
+    "url": "https://www.madkidgames.com/full/world-cricket-championship-lte",
+    "hint": "tap play on the game — and tap ⛶ for fullscreen",
+    "aspect": "16/9",
+    "creditText": "Play World Cricket Championship Lte",
+    "creditUrl": "https://www.madkidgames.com/game/world-cricket-championship-lte"
+  },
   "timeline": {
     "eyebrow": "how we happened", "title": "our little timeline",
     "items": [
@@ -1957,7 +2052,45 @@ $('kissBtn').addEventListener('click', e => {
 });
 
 /* ═══════════════════════════════════════════════════════════════════════
-   REELS — sound UNMUTED by default; scroll-to-top and center play button removed
+   GAME FULLSCREEN
+   ═══════════════════════════════════════════════════════════════════════ */
+function initGameFullscreen(){
+  const btn = $('gameFullscreen');
+  const frame = $('gameFrame');
+  if(!btn || !frame) return;
+
+  btn.addEventListener('click', () => {
+    SFX.tap(); haptic(10);
+    if(document.fullscreenElement){
+      document.exitFullscreen().catch(() => {});
+    } else if(document.webkitFullscreenElement){
+      document.webkitExitFullscreen && document.webkitExitFullscreen();
+    } else {
+      const req = frame.requestFullscreen ||
+                  frame.webkitRequestFullscreen ||
+                  frame.msRequestFullscreen ||
+                  frame.mozRequestFullScreen;
+      if(req){
+        try {
+          const r = req.call(frame);
+          if(r && r.catch) r.catch(() => {});
+        } catch(e){}
+      }
+    }
+  });
+
+  function syncIcon(){
+    const isFs = document.fullscreenElement || document.webkitFullscreenElement;
+    btn.textContent = isFs ? '⛶' : '⛶';
+    btn.setAttribute('aria-label', isFs ? 'Exit fullscreen' : 'Fullscreen');
+  }
+  document.addEventListener('fullscreenchange', syncIcon);
+  document.addEventListener('webkitfullscreenchange', syncIcon);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   REELS — sound UNMUTED by default. Sound preference no longer
+   permanently flipped when autoplay is temporarily blocked.
    ═══════════════════════════════════════════════════════════════════════ */
 function buildReels(){
   const wrap         = document.querySelector('.reels-wrap');
@@ -1974,13 +2107,13 @@ function buildReels(){
   const items = (CONFIG.reels && CONFIG.reels.items) || [];
   if(!items.length){ if(wrap) wrap.style.display = 'none'; return; }
 
-  // NOTE: no `muted` attribute — we want sound on by default
+  // Videos created WITHOUT muted attribute → unmuted by default
   track.innerHTML = items.map(r => {
     const hasSrc = r.src && String(r.src).trim();
     if(hasSrc){
       const poster = r.poster ? ' poster="' + r.poster + '"' : '';
       return '<div class="reel-slide">' +
-        '<video src="' + r.src + '"' + poster + ' loop playsinline preload="metadata"></video>' +
+        '<video src="' + r.src + '"' + poster + ' loop playsinline preload="auto"></video>' +
       '</div>';
     }
     return '<div class="reel-slide">' +
@@ -1994,7 +2127,10 @@ function buildReels(){
 
   const videos = Array.from(track.querySelectorAll('video'));
   let cur = 0;
-  let videosMuted = false;              // ← UNMUTED by default
+
+  /* userWantsSound = the user's PREFERENCE (true = wants audio).
+     This never gets flipped by the autoplay fallback. */
+  let userWantsSound = true;
   let songWasPlayingBeforeReel = false;
 
   dotsBox.innerHTML = items.map((_, i) =>
@@ -2028,18 +2164,33 @@ function buildReels(){
 
   function updateSoundIcon(){
     if(!soundBtn) return;
-    soundBtn.textContent = videosMuted ? '🔇' : '🔊';
-    soundBtn.setAttribute('aria-label', videosMuted ? 'Unmute reels' : 'Mute reels');
-    videos.forEach(v => v.muted = videosMuted);
-    syncSongWithReel();
+    const v = videos[cur];
+    const isMuted = v ? v.muted : !userWantsSound;
+    soundBtn.textContent = isMuted ? '🔇' : '🔊';
+    soundBtn.setAttribute('aria-label', isMuted ? 'Unmute reels' : 'Mute reels');
+    // If user WANTS sound but it's blocked, pulse the icon to invite a tap
+    if(isMuted && userWantsSound){
+      soundBtn.classList.add('blocked');
+    } else {
+      soundBtn.classList.remove('blocked');
+    }
   }
-  if(soundBtn){
-    soundBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      videosMuted = !videosMuted;
-      SFX.tap(); haptic(10);
-      updateSoundIcon();
-    });
+
+  function tryPlay(v){
+    // Respect user preference
+    v.muted = !userWantsSound;
+    const p = v.play();
+    if(p && p.catch){
+      p.catch((err) => {
+        // Autoplay-with-sound blocked. Mute THIS video so it can still play,
+        // but do NOT change the user's preference.
+        if(err.name === 'NotAllowedError' && userWantsSound){
+          v.muted = true;
+          updateSoundIcon();
+          v.play().catch(() => {});
+        }
+      });
+    }
   }
 
   function updateProgress(){
@@ -2069,21 +2220,37 @@ function buildReels(){
     }
     videos.forEach((v, k) => {
       if(k === cur){
-        v.muted = videosMuted;
-        v.play().catch(() => {
-          // browser blocked unmuted autoplay → fall back to muted
-          v.muted = true;
-          videosMuted = true;
-          updateSoundIcon();
-          v.play().catch(() => {});
-        });
+        tryPlay(v);
       } else {
         v.pause();
         try { v.currentTime = 0; } catch(e){}
       }
     });
     syncSongWithReel();
+    updateSoundIcon();
     updateProgress();
+  }
+
+  /* Sound button: toggle based on the CURRENT actual state */
+  if(soundBtn){
+    soundBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      const v = videos[cur];
+      if(!v) return;
+
+      const wasMuted = v.muted;
+      userWantsSound = wasMuted;      // if was muted → user wants sound now
+      v.muted = !userWantsSound;      // apply
+
+      SFX.tap(); haptic(10);
+
+      if(!v.muted && v.paused){
+        // Fresh gesture just unlocked sound — retry play
+        v.play().catch(() => {});
+      }
+      updateSoundIcon();
+      syncSongWithReel();
+    });
   }
 
   if(prev) prev.addEventListener('click', () => { SFX.tap(); haptic(10); goTo(cur - 1); });
@@ -2097,7 +2264,17 @@ function buildReels(){
        e.target.closest('.reels-sound')) return;
     const v = videos[cur];
     if(!v) return;
-    if(v.paused) v.play().catch(()=>{});
+
+    // If the video is muted but user wants sound, unmute + play (fresh gesture)
+    if(v.muted && userWantsSound){
+      v.muted = false;
+      if(v.paused) v.play().catch(() => {});
+      updateSoundIcon();
+      syncSongWithReel();
+      return;
+    }
+
+    if(v.paused) v.play().catch(() => {});
     else v.pause();
   });
 
@@ -2119,8 +2296,6 @@ function buildReels(){
     else goTo(cur - 1);
   }, { passive: true });
 
-  /* wheel scroll navigation REMOVED per request */
-
   addEventListener('keydown', e => {
     if($('main').classList.contains('hidden')) return;
     if(document.activeElement && ['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
@@ -2135,18 +2310,18 @@ function buildReels(){
     entries.forEach(en => {
       const v = videos[cur];
       if(!v) return;
-      if(en.isIntersecting){ v.play().catch(() => {}); }
+      if(en.isIntersecting){ tryPlay(v); }
       else { v.pause(); }
-      setTimeout(() => { syncSongWithReel(); }, 50);
+      setTimeout(() => { syncSongWithReel(); updateSoundIcon(); }, 50);
     });
   }, { threshold: 0.35 });
   io.observe(viewport);
 
   videos.forEach((v, idx) => {
-    v.addEventListener('play',   () => { if(idx === cur) syncSongWithReel(); });
-    v.addEventListener('pause',  () => { if(idx === cur) syncSongWithReel(); });
-    v.addEventListener('ended',  () => { if(idx === cur) syncSongWithReel(); });
-    v.addEventListener('volumechange', () => { if(idx === cur) syncSongWithReel(); });
+    v.addEventListener('play',   () => { if(idx === cur){ syncSongWithReel(); updateSoundIcon(); } });
+    v.addEventListener('pause',  () => { if(idx === cur){ syncSongWithReel(); updateSoundIcon(); } });
+    v.addEventListener('ended',  () => { if(idx === cur){ syncSongWithReel(); updateSoundIcon(); } });
+    v.addEventListener('volumechange', () => { if(idx === cur) updateSoundIcon(); });
     v.addEventListener('timeupdate',   () => { if(idx === cur) updateProgress(); });
     v.addEventListener('loadedmetadata', () => { if(idx === cur) updateProgress(); });
     v.addEventListener('seeked', () => { if(idx === cur) updateProgress(); });
@@ -2393,6 +2568,7 @@ function revealMain(){
   initCake();
   initScratch();
   initMilestone();
+  initGameFullscreen();
   initReveal();
   updateProgress();
   Confetti.burst(160, innerWidth/2, innerHeight * 0.4, {heartsOnly:true});
@@ -2550,6 +2726,10 @@ function initTimeLock(){
   if(CONFIG.game && CONFIG.game.aspect){
     const frame = document.querySelector('.game-frame');
     if(frame) frame.style.aspectRatio = CONFIG.game.aspect;
+  }
+  if(CONFIG.game && CONFIG.game.creditUrl){
+    const a = $('gameCreditLink');
+    if(a) a.href = CONFIG.game.creditUrl;
   }
 
   buildHeroTitle((CONFIG.hero && CONFIG.hero.title) || 'Riya');
