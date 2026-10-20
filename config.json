@@ -153,16 +153,16 @@
   "coupons": {
     "eyebrow":  "no expiry, no excuses",
     "title":    "coupons/tickets",
-    "subtitle": "tap to claim — I'm honouring every single one",
+    "subtitle": "tap to claim — you can choose any 3 and send me screenshot in instagram!",
     "items": [
-      { "e": "🫂", "title": "one long, unhurried hug", "sub": "valid any day, any mood" },
+      { "e": "🫂", "title": "a selfie", "sub": "valid any day, any mood" },
       { "e": "🎬", "title": "movie night, your pick", "sub": "I promise not to fall asleep" },
-      { "e": "🍳", "title": "breakfast cooked for you", "sub": "redeemable on any lazy morning" },
-      { "e": "🧹", "title": "I do your least favorite chore", "sub": "no complaints, no eye rolls" },
+      { "e": "🍳", "title": "do whatever u say for a day", "sub": "redeemable anyday" },
+      { "e": "🧹", "title": "spend one whole day with you!", "sub": "dayy?? i am ready to spend my life with u bbg" },
       { "e": "🍿", "title": "surprise snack delivery", "sub": "just say when" },
-      { "e": "☕", "title": "coffee brought to you", "sub": "made exactly how you like it" },
+      { "e": "☕", "title": "special teaaa", "sub": "speciall secrett tea halakii sb btata hu buttt kuch to hoga hii jo bach gya hoga" },
       { "e": "📞", "title": "one call, any hour", "sub": "yes, even 3am" },
-      { "e": "💌", "title": "a handwritten letter", "sub": "delivered by me, in person" }
+      { "e": "💌", "title": "a handwritten letter", "sub": "delivered by me, in person or through akansha" }
     ]
   },
 
