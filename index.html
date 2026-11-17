@@ -383,100 +383,6 @@ section{ margin-bottom:110px; position:relative; }
 .typing-caret{ display:inline-block; width:2px; height:1.05em; background:var(--accent); margin-left:2px; vertical-align:middle; animation:caretBlink 1s steps(2) infinite; }
 @keyframes caretBlink{ 0%,50%{ opacity:1; } 51%,100%{ opacity:0; } }
 
-/* GAME */
-.game-wrap{ max-width:min(760px, 94vw); margin:0 auto; }
-.game-frame{
-  position:relative;
-  width:100%;
-  aspect-ratio:16/9;
-  max-height:70vh;
-  border-radius:24px;
-  overflow:hidden;
-  border:1px solid var(--line-hi);
-  box-shadow:var(--shadow-deep), inset 0 1px 0 rgba(255,255,255,0.1);
-  background:linear-gradient(160deg, #1e2450, #0f1428);
-}
-.game-frame::before{
-  content:''; position:absolute; inset:0; pointer-events:none; z-index:2;
-  border-radius:24px;
-  box-shadow:inset 0 0 0 1px rgba(200,192,255,0.12);
-}
-.game-frame iframe{
-  width:100%;
-  height:100%;
-  border:none;
-  display:block;
-  background:#0a0e1f;
-}
-.game-fullscreen{
-  position:absolute;
-  top:14px;
-  right:14px;
-  width:44px;
-  height:44px;
-  border-radius:12px;
-  z-index:3;
-  border:1px solid rgba(255,255,255,0.28);
-  background:rgba(15,20,40,0.78);
-  color:#fff;
-  font-size:20px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  transition:all .2s var(--ease);
-  touch-action:manipulation;
-  box-shadow:0 6px 20px rgba(0,0,0,0.45);
-}
-@media (hover:hover){
-  .game-fullscreen:hover{ background:rgba(124,108,240,0.92); border-color:var(--accent); }
-}
-.game-fullscreen:active{ transform:scale(0.9); }
-.game-hint{
-  text-align:center;
-  margin-top:16px;
-  font-size:12px;
-  letter-spacing:0.16em;
-  text-transform:uppercase;
-  color:var(--muted);
-}
-.game-credit{
-  text-align:center;
-  margin-top:10px;
-  font-size:12px;
-  color:var(--muted);
-}
-.game-credit a{
-  color:var(--accent-soft);
-  text-decoration:none;
-  border-bottom:1px solid rgba(200,192,255,0.3);
-  transition:all .2s ease;
-}
-.game-credit a:hover{
-  color:var(--accent);
-  border-color:var(--accent);
-}
-.game-frame:fullscreen,
-.game-frame:-webkit-full-screen{
-  max-height:none;
-  width:100vw;
-  height:100vh;
-  aspect-ratio:auto;
-  border-radius:0;
-  border:none;
-}
-.game-frame:fullscreen iframe,
-.game-frame:-webkit-full-screen iframe{
-  width:100%;
-  height:100%;
-}
-.game-frame:fullscreen .game-fullscreen,
-.game-frame:-webkit-full-screen .game-fullscreen{
-  display:none;
-}
-
 .timeline{ max-width:600px; margin:0 auto; position:relative; padding-left:36px; }
 .timeline::before{ content:''; position:absolute; left:14px; top:12px; bottom:12px;
   width:2px; background:linear-gradient(180deg, transparent, var(--accent) 20%, var(--accent) 80%, transparent); opacity:0.5; }
@@ -704,6 +610,43 @@ section{ margin-bottom:110px; position:relative; }
   opacity:0; transition:opacity .7s ease, transform .18s var(--ease), box-shadow .18s ease; min-height:46px; }
 .kiss-btn.in-view{ opacity:1; }
 .kiss-btn:active{ transform:scale(0.94); box-shadow:0 6px 18px rgba(124,108,240,0.55); }
+
+/* ═══════════ FACE REVEAL SCRATCH ═══════════ */
+.fr-wrap{ max-width:min(540px, 94vw); margin:0 auto; }
+.fr-inner{
+  position:relative; min-height:300px; border-radius:24px; overflow:hidden;
+  border:1px solid var(--line-hi);
+  box-shadow:var(--shadow-deep), inset 0 1px 0 rgba(255,255,255,0.1);
+  background:linear-gradient(160deg, #1e2450, #0f1428);
+  transition:box-shadow .6s ease;
+}
+.fr-inner.revealed{
+  box-shadow:0 0 0 1px rgba(200,192,255,0.35), 0 26px 70px rgba(124,108,240,0.5);
+}
+.fr-content{ position:relative; }
+.fr-img{
+  width:100%; height:auto; display:block;
+  animation:frPop .9s var(--ease-spring) both;
+}
+@keyframes frPop{
+  from{ transform:scale(1.06); filter:blur(6px) brightness(1.3); }
+  to{ transform:none; filter:none; }
+}
+.fr-fallback{
+  padding:64px 24px; text-align:center;
+  font-family:var(--script); font-size:21px; line-height:1.5;
+  color:var(--accent-soft);
+}
+.fr-canvas{
+  position:absolute; inset:0; width:100%; height:100%;
+  cursor:crosshair; touch-action:none;
+  transition:opacity .8s ease;
+}
+.fr-canvas.done{ opacity:0; pointer-events:none; }
+.fr-hint{
+  text-align:center; margin-top:18px; font-size:12px;
+  letter-spacing:0.16em; text-transform:uppercase; color:var(--muted);
+}
 
 /* ═══════════════════════════════════════════════════════════════════════
    REELS — natural aspect ratio, no forced cropping
@@ -970,8 +913,6 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
   .cd-sep{ font-size:20px; margin-top:-12px; }
   .lock-card{ padding:38px 22px 26px; }
   .lock-title{ font-size:30px; }
-  .game-wrap{ max-width:min(560px, 96vw); }
-  .game-fullscreen{ width:38px; height:38px; font-size:17px; top:10px; right:10px; }
   .timeline{ padding-left:32px; }
   .open-when-grid{ grid-template-columns:repeat(2, 1fr); gap:12px; }
   .ow-card{ height:170px; }
@@ -991,6 +932,7 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
   .ms-unit{ min-width:54px; padding:12px 6px; }
   .ms-num{ font-size:24px; }
   .coupon{ padding:18px 20px; }
+  .fr-inner{ min-height:240px; }
   .reels-wrap{ max-width:min(440px, 96vw); }
   .reels-btn{ width:44px; height:44px; font-size:24px; }
   .reels-prev{ left:8px; }
@@ -1105,38 +1047,6 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
 
   <section>
     <div class="section-head reveal">
-      <div class="eyebrow" data-cfg="game.eyebrow">take a break</div>
-      <h2 class="section-title script" data-cfg="game.title">our little arcade</h2>
-      <p class="section-sub" data-cfg="game.subtitle">made for you — see if you can beat my high score 💜</p>
-    </div>
-    <div class="game-wrap reveal">
-      <div class="game-frame" id="gameFrame">
-        <iframe id="gameIframe"
-                src="https://www.madkidgames.com/full/world-cricket-championship-lte"
-                loading="lazy"
-                allow="autoplay; fullscreen; gamepad"
-                allowfullscreen
-                scrolling="no"
-                referrerpolicy="no-referrer-when-downgrade"
-                title="World Cricket Championship Lte"></iframe>
-        <button class="game-fullscreen" id="gameFullscreen" aria-label="Fullscreen" title="Fullscreen">⛶</button>
-      </div>
-      <div class="game-hint" data-cfg="game.hint">tap play on the game — and tap ⛶ for fullscreen</div>
-      <p class="game-credit">
-        <a id="gameCreditLink"
-           href="https://www.madkidgames.com/game/world-cricket-championship-lte"
-           target="_blank"
-           rel="noopener noreferrer"
-           data-cfg="game.creditText">Play World Cricket Championship Lte</a>
-      </p>
-      <noscript>
-        <p style="text-align:center;font-size:13px;"><a href="https://www.madkidgames.com/game/world-cricket-championship-lte">Play World Cricket Championship Lte</a></p>
-      </noscript>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head reveal">
       <div class="eyebrow" data-cfg="timeline.eyebrow">how we happened</div>
       <h2 class="section-title script" data-cfg="timeline.title">our little timeline</h2>
     </div>
@@ -1217,27 +1127,77 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
       </div>
       <div class="letter-card" id="letterCard">
         <div class="letter-top" data-cfg="letter.top">a letter to you, riya</div>
-        <div class="letter-greet" data-cfg="letter.greet">my bestie,</div>
+        <div class="letter-greet" data-cfg="letter.greet">Dear riri,</div>
         <div class="letter-body">
-          <!-- ✍️ REPLACE THE LETTER BODY BELOW WITH YOUR OWN WORDS -->
+          <p>Happy Birthday, meri jaan. ❤️</p>
           <p>
-            [your letter goes here — write it for your best friend. the inside jokes,
-            the memories, the things you'd never say out loud. add as many paragraphs
-            as you like — they'll fade in one by one when riya scrolls here.]
+            Pata nahi yeh letter kahan se shuru karun, kyunki honestly jitna bhi likh loon,
+            shayad woh kabhi express nahi kar paaunga jo main actually feel karta hoon.
           </p>
           <p>
-            [fill this with everything you want them to know. the appreciation, the memories,
-            the "remember when"s, the "thank you for"s. this page belongs entirely to you two.]
+            Sabse pehle, thank you. Thank you meri life mein aane ke liye. Kabhi socha nahi tha
+            ki aapse milna meri life ka itna special part ban jayega. Aapse baat karna, chhoti
+            chhoti baaton pe hasna, random conversations aur woh saari silly si cheezein, pata
+            nahi kyun but sab kuch bahut special lagta hai. Aap sirf meri bestie nahi hain, aap
+            woh person hain jinse baat karke genuinely accha feel hota hai.
           </p>
           <p>
-            [and end it the way only you can — with something they'll screenshot.
-            something they'll come back to on bad days. then sign it.]
+            Aaj aapka birthday hai, toh meri bas yahi wish hai ki aap hamesha khush rahein.
+            Aapki saari wishes poori hon, jo bhi aap life mein achieve karna chahti hain woh sab
+            mile. Aur kabhi aisa na ho ki aapko lage ki aap akeli hain. Kabhi bhi kuch ho, chahe
+            accha ya bura, I hope aap bina soche mujhse share kar sakein.
           </p>
-          <!-- ✍️ END OF LETTER PLACEHOLDER -->
+          <p>
+            Main jaanta hoon main perfect nahi hoon. Kabhi kuch galat bol sakta hoon, kabhi
+            anjaane mein hurt bhi kar sakta hoon. But I never want you to feel that you don't
+            matter to me. Aap mere liye genuinely bahut special hain, and I hope aapko kabhi is
+            baat pe doubt na ho.
+          </p>
+          <p>
+            Mujhe nahi pata future mein life kahan le jaayegi, but I really hope hum aise hi
+            connected rahein. Aage bhi random baatein ho, hasi mazaak ho, ek dusre ko pareshan
+            karna ho aur bahut saari memories banani hon.
+          </p>
+          <p>
+            Aaj ka din sirf aapka hai, toh please aaj bilkul overthink mat kariyega. Khub enjoy
+            kariyega, cake khaiyega, photos lijiye aur bahut saari smile kijiye. Aap deserve
+            karti hain ki aapka har birthday itna hi special ho.
+          </p>
+          <p>
+            Aur haan, ek baat hamesha yaad rakhiyega, kabhi bhi kuch ho, aap mujhse baat kar
+            sakti hain. Main hamesha aapki baat sunne ke liye rahunga.
+          </p>
+          <p>Happy Birthday once again, meri riri. ❤️</p>
+          <p>
+            I genuinely wish ki aapki life mein bahut saari khushiyan aayein, aapke saare dreams
+            poore hon aur aap hamesha aise hi hansti muskurati rahein.
+          </p>
+          <p>
+            Mwahhhh, riiiriuua Take care of yourself and never stop being the person you are. ❤️
+          </p>
         </div>
-        <div class="letter-sign" data-cfg="letter.sign">always — yours 💜</div>
+        <div class="letter-sign" data-cfg="letter.sign">Forever yours, ❤️</div>
         <button class="kiss-btn" id="kissBtn" data-cfg="letter.button">💌 send a hug</button>
       </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FACE REVEAL ═══════════ -->
+  <section>
+    <div class="section-head reveal">
+      <div class="eyebrow">and now, the moment you were waiting for</div>
+      <h2 class="section-title">FACE REVEAL</h2>
+      <p class="section-sub">scratch the card below, bestie 💜</p>
+    </div>
+    <div class="fr-wrap reveal">
+      <div class="fr-inner" id="frInner">
+        <div class="fr-content">
+          <img class="fr-img" id="frImg" src="fr.jpg" alt="face reveal">
+          <div class="fr-fallback hidden" id="frFallback">fr.jpg didn't load —<br>drop the photo next to index.html</div>
+        </div>
+        <canvas class="fr-canvas" id="frCanvas"></canvas>
+      </div>
+      <div class="fr-hint">use your finger to scratch</div>
     </div>
   </section>
 
@@ -1327,14 +1287,6 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
   "hero": { "moonIcon": "🌙", "eyebrow": "a little something for you", "preTitle": "to my favorite human,", "title": "Riya", "subtitleHTML": "you're the person I text first about everything. this is me, every word, every little thing — <em>for you</em>." },
   "ticker": { "lines": ["💜 to riya, my favorite human 💜","partner in crime","my person, always","the bestie of all besties","chaos coordinator","till the stars go out","you make life fun"] },
   "intro": { "textHTML": "riya, there are <em>ten thousand reasons</em> why you're my favorite person — and somehow, every single one of them is the way you <em>laugh</em>." },
-  "game": {
-    "eyebrow": "take a break",
-    "title": "our little arcade",
-    "subtitle": "made for you — see if you can beat my high score 💜",
-    "hint": "tap play on the game — and tap ⛶ for fullscreen",
-    "creditText": "Play World Cricket Championship Lte",
-    "creditUrl": "https://www.madkidgames.com/game/world-cricket-championship-lte"
-  },
   "timeline": {
     "eyebrow": "how we happened", "title": "our little timeline",
     "items": [
@@ -1410,7 +1362,7 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
     ]
   },
   "scratch": { "eyebrow": "scratch to reveal", "title": "a secret for you", "emoji": "💜", "textHTML": "I knew the moment I met you —<br>you'd be someone I'd never want to lose.", "hint": "use your finger to scratch" },
-  "letter": { "top": "a letter to you, riya", "greet": "my bestie,", "sign": "always — yours 💜", "button": "💌 send a hug" },
+  "letter": { "top": "a letter to you, riya", "greet": "Dear riri,", "sign": "Forever yours, ❤️", "button": "💌 send a hug" },
   "reels": {
     "eyebrow": "little moments", "title": "our reels",
     "subtitle": "swipe or use the arrows — tap the sound icon to mute or unmute",
@@ -1427,6 +1379,9 @@ footer span{ font-family:var(--script); color:var(--accent); font-size:22px; dis
 </script>
 
 <script>
+/* ═══════════════════════════════════════════════════════════════════════
+   CONFIG
+   ═══════════════════════════════════════════════════════════════════════ */
 let CONFIG = null;
 
 async function loadConfig(){
@@ -1476,11 +1431,17 @@ const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const rand = (a,b) => a + Math.random() * (b - a);
 const randInt = (a,b) => Math.floor(rand(a,b+1));
 const IS_MOBILE = () => innerWidth < 500;
-const song = $('song');
-let entered = '', interactive = false, audioCtx = null;
-let PIN = '1911', SONG_START = 0, LAUNCH_DATE = '', MILESTONE_DATE = '';
-let userPausedSong = false;
 
+const song = $('song');
+let audioCtx = null;
+let PIN = '1911', SONG_START = 0, LAUNCH_DATE = '', MILESTONE_DATE = '';
+let tlTimer = null, msTimer = null;
+let balloonTimer = null;
+let letterOpened = false;
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SFX + HAPTICS
+   ═══════════════════════════════════════════════════════════════════════ */
 const SFX = (() => {
   function ctx(){
     if(!audioCtx){
@@ -1517,6 +1478,9 @@ const SFX = (() => {
 })();
 const haptic = ms => { try{ navigator.vibrate && navigator.vibrate(ms); }catch(e){} };
 
+/* ═══════════════════════════════════════════════════════════════════════
+   STARFIELD
+   ═══════════════════════════════════════════════════════════════════════ */
 const Starfield = (() => {
   const canvas = $('stars');
   const ctx = canvas.getContext('2d');
@@ -1565,6 +1529,9 @@ const Starfield = (() => {
   return { start };
 })();
 
+/* ═══════════════════════════════════════════════════════════════════════
+   CONFETTI
+   ═══════════════════════════════════════════════════════════════════════ */
 const Confetti = (() => {
   const canvas = $('confetti');
   const ctx = canvas.getContext('2d');
@@ -1636,6 +1603,9 @@ const Confetti = (() => {
   return { burst, resize };
 })();
 
+/* ═══════════════════════════════════════════════════════════════════════
+   AMBIENT PARTICLES
+   ═══════════════════════════════════════════════════════════════════════ */
 (function(){
   if(reduceMotion) return;
   const box = $('petals');
@@ -1720,6 +1690,58 @@ const Confetti = (() => {
   setInterval(() => { if(Math.random() < 0.5) shootStar(); }, 5000);
 })();
 
+/* ═══════════════════════════════════════════════════════════════════════
+   LITTLE FX HELPERS
+   ═══════════════════════════════════════════════════════════════════════ */
+function emojiBurst(x, y, n, spread, glyphs){
+  if(reduceMotion) return;
+  glyphs = glyphs || ['💜'];
+  n = n || 12;
+  spread = spread || 100;
+  for(let i = 0; i < n; i++){
+    const el = document.createElement('div');
+    el.className = 'pop';
+    el.textContent = glyphs[(Math.random() * glyphs.length) | 0];
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.fontSize = rand(14, 26) + 'px';
+    const ang = Math.random() * Math.PI * 2;
+    const dist = rand(spread * 0.35, spread);
+    el.style.setProperty('--dx', (Math.cos(ang) * dist).toFixed(1) + 'px');
+    el.style.setProperty('--dy', (Math.sin(ang) * dist).toFixed(1) + 'px');
+    el.style.setProperty('--rot', rand(-180, 180).toFixed(0) + 'deg');
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1100);
+  }
+}
+
+function launchBalloons(count){
+  if(reduceMotion) return;
+  count = count || randInt(5, 9);
+  const glyphs = ['🎈','💜','🎀','✨','💫','🎉'];
+  for(let i = 0; i < count; i++){
+    const b = document.createElement('div');
+    b.textContent = glyphs[(Math.random() * glyphs.length) | 0];
+    b.style.cssText = 'position:fixed;left:' + rand(2, 96).toFixed(1) + 'vw;bottom:-70px;' +
+      'font-size:' + rand(20, 38).toFixed(0) + 'px;z-index:39;pointer-events:none;' +
+      'will-change:transform,opacity;';
+    document.body.appendChild(b);
+    const dur = rand(6500, 11000);
+    const drift = rand(-90, 90);
+    const rot = rand(-30, 30);
+    const anim = b.animate([
+      { transform: 'translate(0, 0) rotate(0deg)', opacity: 0 },
+      { opacity: 1, offset: 0.12 },
+      { transform: 'translate(' + drift.toFixed(0) + 'px, -118vh) rotate(' + rot.toFixed(0) + 'deg)', opacity: 0 }
+    ], { duration: dur, easing: 'linear' });
+    anim.onfinish = () => b.remove();
+    setTimeout(() => b.remove(), dur + 600);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   BUILDERS
+   ═══════════════════════════════════════════════════════════════════════ */
 function buildHeroTitle(name){
   const box = $('heroTitle');
   box.innerHTML = '';
@@ -1736,7 +1758,7 @@ function buildHeroTitle(name){
 }
 
 function buildTicker(){
-  const lines = CONFIG.ticker.lines || [];
+  const lines = (CONFIG.ticker && CONFIG.ticker.lines) || [];
   const html = lines.map(l => '<span>' + l + '</span>').join('');
   $('tickerTrack').innerHTML = html + html + html + html;
 }
@@ -1751,7 +1773,7 @@ function startTyping(){
     if(full[i] === '<'){
       const end = full.indexOf('>', i);
       if(end === -1){ tokens.push(full.slice(i)); break; }
-      tokens.push(full.slice(i, end+1)); i = end + 1;
+      tokens.push(full.slice(i, end + 1)); i = end + 1;
     } else { tokens.push(full[i]); i++; }
   }
   el.innerHTML = '';
@@ -1759,7 +1781,7 @@ function startTyping(){
   function step(){
     if(pos >= tokens.length){ el.innerHTML = full; return; }
     el.innerHTML += tokens[pos++];
-    setTimeout(step, tokens[pos-1] && tokens[pos-1].startsWith('<') ? 0 : 28);
+    setTimeout(step, tokens[pos - 1] && tokens[pos - 1].startsWith('<') ? 0 : 26);
   }
   step();
 }
@@ -1819,7 +1841,7 @@ function buildCoupons(){
       el.classList.add('claimed');
       SFX.pop(); haptic(20);
       const r = el.getBoundingClientRect();
-      emojiBurst(r.left + r.width/2, r.top + r.height/2, 8, 90, ['💜','💙','✦','💫']);
+      emojiBurst(r.left + r.width / 2, r.top + r.height / 2, 8, 90, ['💜','💙','✦','💫']);
     });
   });
 }
@@ -1827,7 +1849,9 @@ function buildCoupons(){
 function buildQuiz(){
   const box = $('quiz');
   const QUIZ = (CONFIG.quiz && CONFIG.quiz.items) || [];
+  if(!QUIZ.length) return;
   let idx = 0, score = 0, answered = false;
+
   function render(){
     answered = false;
     const q = QUIZ[idx];
@@ -1836,13 +1860,13 @@ function buildQuiz(){
       '<div class="quiz-card">' +
         '<div class="quiz-progress">' +
           '<div class="quiz-progress-bar"><i style="width:' + pct + '%"></i></div>' +
-          '<div class="quiz-count">' + (idx+1) + ' / ' + QUIZ.length + '</div>' +
+          '<div class="quiz-count">' + (idx + 1) + ' / ' + QUIZ.length + '</div>' +
         '</div>' +
         '<div class="quiz-q">' + q.q + '</div>' +
         '<div class="quiz-opts">' +
           q.opts.map((o, i) =>
             '<button class="quiz-opt" data-i="' + i + '">' +
-              '<span class="k">' + String.fromCharCode(65+i) + '</span>' +
+              '<span class="k">' + String.fromCharCode(65 + i) + '</span>' +
               '<span>' + o + '</span>' +
             '</button>'
           ).join('') +
@@ -1852,6 +1876,7 @@ function buildQuiz(){
           (idx === QUIZ.length - 1 ? 'see the verdict 💜' : 'next →') +
         '</button>' +
       '</div>';
+
     box.querySelectorAll('.quiz-opt').forEach(btn => {
       btn.addEventListener('click', () => {
         if(answered) return;
@@ -1869,16 +1894,19 @@ function buildQuiz(){
         const fb = $('quizFb');
         fb.textContent = correct ? q.ok : q.no;
         fb.classList.add('show');
-        $('quizNext').classList.remove('hidden');
-        $('quizNext').addEventListener('click', next);
+        const nextBtn = $('quizNext');
+        nextBtn.classList.remove('hidden');
+        nextBtn.addEventListener('click', next);
       });
     });
   }
+
   function next(){ idx++; if(idx < QUIZ.length) render(); else final(); }
+
   function final(){
     const pct = Math.round((score / QUIZ.length) * 100);
     let title, msg, emoji;
-    if(pct === 100){ title = 'you know us by heart'; msg = 'of course you do. you\'re the other half of it.'; emoji = '💜'; Confetti.burst(180, undefined, undefined, {heartsOnly:true}); }
+    if(pct === 100){ title = 'you know us by heart'; msg = 'of course you do. you\'re the other half of it.'; emoji = '💜'; Confetti.burst(180, undefined, undefined, { heartsOnly: true }); }
     else if(pct >= 66){ title = 'you know us well'; msg = 'and still — every day, more to learn, more to appreciate.'; emoji = '💙'; }
     else if(pct >= 33){ title = 'you know a little'; msg = 'let me remind you, then. stay close.'; emoji = '💫'; }
     else { title = 'you know me'; msg = 'that\'s enough. that\'s everything.'; emoji = '✨'; }
@@ -1892,6 +1920,7 @@ function buildQuiz(){
       '</div></div>';
     $('quizReplay').addEventListener('click', () => { idx = 0; score = 0; render(); });
   }
+
   render();
 }
 
@@ -1901,9 +1930,11 @@ function buildReasons(){
   const emoji = $('reasonEmoji');
   const count = $('reasonCount');
   const REASONS = (CONFIG.reasons && CONFIG.reasons.items) || [];
+  if(!btn || !REASONS.length) return;
   const labels = CONFIG.reasons || {};
   count.textContent = '0 / ' + REASONS.length;
-  let seen = new Set();
+  const seen = new Set();
+
   btn.addEventListener('click', () => {
     SFX.pop(); haptic(12);
     if(seen.size >= REASONS.length) seen.clear();
@@ -1925,12 +1956,14 @@ function buildReasons(){
   });
 }
 
+/* ── SECRET SCRATCH (the original one) ─────────────────────────────── */
 function initScratch(){
   const canvas = $('scratchCanvas');
   if(!canvas) return;
   const ctx = canvas.getContext('2d');
   let initialized = false, done = false, pointerDown = false;
   let lastX = null, lastY = null, checked = 0;
+
   function sizeCanvas(){
     const rect = canvas.getBoundingClientRect();
     if(!rect.width || !rect.height) return false;
@@ -1961,12 +1994,14 @@ function initScratch(){
     initialized = true;
     return true;
   }
+
   function scratchedPct(){
     const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
     let clear = 0, total = 0;
     for(let i = 3; i < data.length; i += 4 * 8){ total++; if(data[i] === 0) clear++; }
     return total ? clear / total : 0;
   }
+
   function scratchAt(x, y){
     if(done) return;
     const rect = canvas.getBoundingClientRect();
@@ -1975,8 +2010,9 @@ function initScratch(){
     ctx.globalCompositeOperation = 'destination-out';
     ctx.beginPath(); ctx.arc(px, py, 30, 0, Math.PI * 2); ctx.fill();
     if(lastX !== null){
-      const mx = (lastX + px) / 2, my = (lastY + py) / 2;
-      ctx.beginPath(); ctx.arc(mx, my, 24, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath();
+      ctx.arc((lastX + px) / 2, (lastY + py) / 2, 24, 0, Math.PI * 2);
+      ctx.fill();
     }
     lastX = px; lastY = py;
     checked++;
@@ -1984,11 +2020,12 @@ function initScratch(){
       done = true;
       canvas.classList.add('done');
       SFX.success(); haptic(30);
-      Confetti.burst(80, undefined, undefined, {heartsOnly:true});
+      Confetti.burst(80, undefined, undefined, { heartsOnly: true });
       const r = canvas.getBoundingClientRect();
-      emojiBurst(r.left + r.width/2, r.top + r.height/2, 20, 160, ['💜','✨','💫','✦']);
+      emojiBurst(r.left + r.width / 2, r.top + r.height / 2, 20, 160, ['💜','✨','💫','✦']);
     }
   }
+
   function start(e){
     if(!initialized || done) return;
     pointerDown = true; lastX = null; lastY = null;
@@ -2003,6 +2040,7 @@ function initScratch(){
     e.preventDefault();
   }
   function end(){ pointerDown = false; lastX = null; lastY = null; }
+
   if(window.PointerEvent){
     canvas.addEventListener('pointerdown', start);
     canvas.addEventListener('pointermove', move);
@@ -2010,8 +2048,8 @@ function initScratch(){
     canvas.addEventListener('pointercancel', end);
     canvas.addEventListener('pointerleave', end);
   } else {
-    canvas.addEventListener('touchstart', start, {passive:false});
-    canvas.addEventListener('touchmove', move, {passive:false});
+    canvas.addEventListener('touchstart', start, { passive: false });
+    canvas.addEventListener('touchmove', move, { passive: false });
     canvas.addEventListener('touchend', end);
     canvas.addEventListener('touchcancel', end);
     canvas.addEventListener('mousedown', start);
@@ -2019,6 +2057,7 @@ function initScratch(){
     canvas.addEventListener('mouseup', end);
     canvas.addEventListener('mouseleave', end);
   }
+
   const initIO = new IntersectionObserver(entries => {
     entries.forEach(en => {
       if(!en.isIntersecting) return;
@@ -2027,701 +2066,816 @@ function initScratch(){
     });
   }, { threshold: 0.2 });
   initIO.observe(canvas);
-  addEventListener('resize', () => { if(!done && initialized) sizeCanvas(); }, {passive:true});
-}
 
-let balloonTimer = null;
-function openLetter(){
-  const zone = $('letterZone');
-  zone.classList.add('show');
-  zone.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  setTimeout(() => {
-    $('envelope').classList.add('open');
-    SFX.whoosh();
-    const er = $('envelope').getBoundingClientRect();
-    emojiBurst(er.left + er.width/2, er.top + 40, 20, 150, ['💌','💜','💫','✦']);
-    Confetti.burst(120, innerWidth/2, innerHeight * 0.25, {heartsOnly:true});
-    launchBalloons();
-    if(!balloonTimer) balloonTimer = setInterval(launchBalloons, 5000);
-    const card = $('letterCard');
-    card.classList.add('in-view');
-    const paras = card.querySelectorAll('.letter-body p');
-    const step = IS_MOBILE() ? 220 : 340;
-    paras.forEach((p, i) => setTimeout(() => p.classList.add('in-view'), 400 + i * step));
-    setTimeout(() => card.querySelector('.letter-sign').classList.add('in-view'), 400 + paras.length * step + 150);
-    setTimeout(() => $('kissBtn').classList.add('in-view'), 400 + paras.length * step + 400);
-    setTimeout(() => {
-      card.querySelectorAll('.letter-body p,.letter-sign,.letter-top,.letter-greet').forEach(el => {
-        el.classList.add('in-view'); el.style.opacity = '0.95';
-      });
-      $('kissBtn').classList.add('in-view');
-    }, 400 + paras.length * step + 1700);
-  }, 700);
-}
-$('kissBtn').addEventListener('click', e => {
-  SFX.kiss(); haptic(25);
-  const r = e.currentTarget.getBoundingClientRect();
-  hugBurst(r.left + r.width/2, r.top);
-  Confetti.burst(50, r.left + r.width/2, r.top, {heartsOnly:true});
-});
-
-/* ═══════════════════════════════════════════════════════════════════════
-   GAME FULLSCREEN
-   ═══════════════════════════════════════════════════════════════════════ */
-function initGameFullscreen(){
-  const btn = $('gameFullscreen');
-  const frame = $('gameFrame');
-  if(!btn || !frame) return;
-
-  btn.addEventListener('click', () => {
-    SFX.tap(); haptic(10);
-    if(document.fullscreenElement){
-      document.exitFullscreen().catch(() => {});
-    } else if(document.webkitFullscreenElement){
-      document.webkitExitFullscreen && document.webkitExitFullscreen();
-    } else {
-      const req = frame.requestFullscreen ||
-                  frame.webkitRequestFullscreen ||
-                  frame.msRequestFullscreen ||
-                  frame.mozRequestFullScreen;
-      if(req){
-        try {
-          const r = req.call(frame);
-          if(r && r.catch) r.catch(() => {});
-        } catch(e){}
-      }
-    }
-  });
-
-  function syncIcon(){
-    const isFs = document.fullscreenElement || document.webkitFullscreenElement;
-    btn.textContent = isFs ? '⛶' : '⛶';
-    btn.setAttribute('aria-label', isFs ? 'Exit fullscreen' : 'Fullscreen');
-  }
-  document.addEventListener('fullscreenchange', syncIcon);
-  document.addEventListener('webkitfullscreenchange', syncIcon);
+  addEventListener('resize', () => { if(!done && initialized) sizeCanvas(); }, { passive: true });
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   REELS — each reel displays at its own native aspect ratio
+   FACE REVEAL SCRATCH
    ═══════════════════════════════════════════════════════════════════════ */
-function buildReels(){
-  const wrap         = document.querySelector('.reels-wrap');
-  const viewport     = $('reelsViewport');
-  const track        = $('reelsTrack');
-  const dotsBox      = $('reelsDots');
-  const caption      = $('reelsCaption');
-  const prev         = $('reelsPrev');
-  const next         = $('reelsNext');
-  const soundBtn     = $('reelsSound');
-  const progressFill = $('reelsProgressFill');
-  if(!track || !viewport) return;
+function initFaceReveal(){
+  const inner    = $('frInner');
+  const canvas   = $('frCanvas');
+  const img      = $('frImg');
+  const fallback = $('frFallback');
+  if(!inner || !canvas) return;
 
-  const items = (CONFIG.reels && CONFIG.reels.items) || [];
-  if(!items.length){ if(wrap) wrap.style.display = 'none'; return; }
+  const ctx = canvas.getContext('2d');
+  let painted = false, started = false, done = false;
+  let pointerDown = false, lastX = null, lastY = null, checked = 0;
 
-  track.innerHTML = items.map(r => {
-    const hasSrc = r.src && String(r.src).trim();
-    if(hasSrc){
-      const poster = r.poster ? ' poster="' + r.poster + '"' : '';
-      return '<div class="reel-slide">' +
-        '<video src="' + r.src + '"' + poster + ' loop playsinline preload="auto"></video>' +
-      '</div>';
+  function paintFoil(){
+    const rect = canvas.getBoundingClientRect();
+    const w = Math.round(rect.width), h = Math.round(rect.height);
+    if(!w || !h) return;
+
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    canvas.width  = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const g = ctx.createLinearGradient(0, 0, w, h);
+    g.addColorStop(0,    '#c8c0ff');
+    g.addColorStop(0.35, '#7c6cf0');
+    g.addColorStop(0.65, '#6ba3ff');
+    g.addColorStop(1,    '#a99cff');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+
+    for(let i = 0; i < 280; i++){
+      ctx.fillStyle = Math.random() > 0.5 ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.18)';
+      const s = Math.random() * 2.4 + 0.7;
+      ctx.fillRect(Math.random() * w, Math.random() * h, s, s);
     }
-    return '<div class="reel-slide">' +
-      '<div class="reel-placeholder">' +
-        '<div class="reel-ph-emoji">🎬</div>' +
-        '<div class="reel-ph-text">' + (r.caption || 'coming soon') + '</div>' +
-        '<div class="reel-ph-hint">add "src" in config.json</div>' +
-      '</div>' +
-    '</div>';
-  }).join('');
 
-  const slides = Array.from(track.querySelectorAll('.reel-slide'));
-  const videos = Array.from(track.querySelectorAll('video'));
-  let cur = 0;
+    ctx.save();
+    ctx.globalAlpha = 0.16;
+    ctx.translate(w / 2, h / 2);
+    ctx.rotate(-0.42);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(-w, -h * 0.05, w * 2, h * 0.1);
+    ctx.restore();
 
-  let userWantsSound = true;
-  let songWasPlayingBeforeReel = false;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = 'rgba(255,255,255,0.96)';
+    ctx.font = "700 20px 'Playfair Display', serif";
+    ctx.fillText('scratch me ✨', w / 2, h / 2 - 12);
+    ctx.font = "400 12px 'Poppins', sans-serif";
+    ctx.fillStyle = 'rgba(255,255,255,0.78)';
+    ctx.fillText('face reveal underneath', w / 2, h / 2 + 16);
 
-  dotsBox.innerHTML = items.map((_, i) =>
-    '<button class="reels-dot" data-i="' + i + '" aria-label="Go to reel ' + (i + 1) + '"></button>'
-  ).join('');
-  const dots = Array.from(dotsBox.querySelectorAll('.reels-dot'));
-
-  function updateMusicBtn(){
-    const b = $('music-player');
-    if(b) b.classList.toggle('playing', !song.paused);
+    painted = true;
   }
 
-  function syncSongWithReel(){
-    const v = videos[cur];
-    if(!v) return;
-    const reelHasAudio = !v.paused && !v.muted;
-    if(reelHasAudio){
-      if(!song.paused && !userPausedSong){
-        songWasPlayingBeforeReel = true;
-        song.pause();
-        updateMusicBtn();
-      }
-    } else {
-      if(songWasPlayingBeforeReel && !userPausedSong){
-        songWasPlayingBeforeReel = false;
-        song.play().catch(()=>{});
-        updateMusicBtn();
-      }
-    }
+  function scratchedPct(){
+    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let clear = 0, total = 0;
+    for(let i = 3; i < data.length; i += 4 * 8){ total++; if(data[i] === 0) clear++; }
+    return total ? clear / total : 0;
   }
 
-  function updateSoundIcon(){
-    if(!soundBtn) return;
-    const v = videos[cur];
-    const isMuted = v ? v.muted : !userWantsSound;
-    soundBtn.textContent = isMuted ? '🔇' : '🔊';
-    soundBtn.setAttribute('aria-label', isMuted ? 'Unmute reels' : 'Mute reels');
-    if(isMuted && userWantsSound) soundBtn.classList.add('blocked');
-    else soundBtn.classList.remove('blocked');
+  function finish(){
+    if(done) return;
+    done = true;
+    canvas.classList.add('done');
+    inner.classList.add('revealed');
+    SFX.success();
+    haptic(30);
+    Confetti.burst(140, undefined, undefined, { heartsOnly: true });
   }
 
-  function tryPlay(v){
-    v.muted = !userWantsSound;
-    const p = v.play();
-    if(p && p.catch){
-      p.catch((err) => {
-        if(err.name === 'NotAllowedError' && userWantsSound){
-          v.muted = true;
-          updateSoundIcon();
-          v.play().catch(() => {});
-        }
-      });
+  function scratchAt(cx, cy){
+    if(done || !painted) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = cx - rect.left, y = cy - rect.top;
+    if(x < 0 || y < 0 || x > rect.width || y > rect.height) return;
+
+    started = true;
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.beginPath(); ctx.arc(x, y, 32, 0, Math.PI * 2); ctx.fill();
+    if(lastX !== null){
+      ctx.beginPath();
+      ctx.arc((lastX + x) / 2, (lastY + y) / 2, 26, 0, Math.PI * 2);
+      ctx.fill();
     }
+    lastX = x; lastY = y;
+
+    checked++;
+    if(checked % 6 === 0 && scratchedPct() > 0.5) finish();
   }
 
-  function updateProgress(){
-    const v = videos[cur];
-    if(!v || !progressFill) return;
-    if(v.duration && isFinite(v.duration) && v.duration > 0){
-      progressFill.style.width = ((v.currentTime / v.duration) * 100) + '%';
-    } else {
-      progressFill.style.width = '0%';
-    }
+  function down(e){
+    if(!painted || done) return;
+    pointerDown = true; lastX = null; lastY = null;
+    const p = e.touches ? e.touches[0] : e;
+    scratchAt(p.clientX, p.clientY);
+    e.preventDefault();
+  }
+  function move(e){
+    if(!pointerDown || done) return;
+    const p = e.touches ? e.touches[0] : e;
+    scratchAt(p.clientX, p.clientY);
+    e.preventDefault();
+  }
+  function up(){ pointerDown = false; lastX = null; lastY = null; }
+
+  if(window.PointerEvent){
+    canvas.addEventListener('pointerdown', down);
+    canvas.addEventListener('pointermove', move);
+    canvas.addEventListener('pointerup', up);
+    canvas.addEventListener('pointercancel', up);
+    canvas.addEventListener('pointerleave', up);
+  } else {
+    canvas.addEventListener('touchstart', down, { passive: false });
+    canvas.addEventListener('touchmove',  move, { passive: false });
+    canvas.addEventListener('touchend',   up);
+    canvas.addEventListener('touchcancel', up);
+    canvas.addEventListener('mousedown', down);
+    canvas.addEventListener('mousemove', move);
+    canvas.addEventListener('mouseup',   up);
+    canvas.addEventListener('mouseleave', up);
   }
 
-  function goTo(i){
-    if(i < 0) i = 0;
-    if(i >= items.length) i = items.length - 1;
-    cur = i;
-
-    /* Each slide uses display: none/block so the viewport sizes to the
-       current video's natural aspect ratio — nothing forced or cropped. */
-    slides.forEach((s, k) => s.classList.toggle('active', k === cur));
-
-    dots.forEach((d, k) => d.classList.toggle('active', k === cur));
-    if(prev) prev.disabled = cur === 0;
-    if(next) next.disabled = cur === items.length - 1;
-    if(caption){
-      caption.style.opacity = '0';
-      setTimeout(() => {
-        caption.textContent = items[cur].caption || '';
-        caption.style.opacity = '1';
-      }, 120);
-    }
-    videos.forEach((v, k) => {
-      if(k === cur){ tryPlay(v); }
-      else { v.pause(); try { v.currentTime = 0; } catch(e){} }
+  if(img){
+    img.addEventListener('error', () => {
+      img.classList.add('hidden');
+      if(fallback) fallback.classList.remove('hidden');
+      if(!started) paintFoil();
     });
-    syncSongWithReel();
-    updateSoundIcon();
-    updateProgress();
+    img.addEventListener('load', () => { if(!started) requestAnimationFrame(paintFoil); });
+    if(img.complete && img.naturalWidth) requestAnimationFrame(paintFoil);
   }
 
-  if(soundBtn){
-    soundBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      const v = videos[cur];
-      if(!v) return;
-      const wasMuted = v.muted;
-      userWantsSound = wasMuted;
-      v.muted = !userWantsSound;
-      SFX.tap(); haptic(10);
-      if(!v.muted && v.paused) v.play().catch(() => {});
-      updateSoundIcon();
-      syncSongWithReel();
-    });
-  }
-
-  if(prev) prev.addEventListener('click', () => { SFX.tap(); haptic(10); goTo(cur - 1); });
-  if(next) next.addEventListener('click', () => { SFX.tap(); haptic(10); goTo(cur + 1); });
-  dots.forEach(d => d.addEventListener('click', () => {
-    SFX.tap(); haptic(10); goTo(+d.dataset.i);
-  }));
-
-  viewport.addEventListener('click', e => {
-    if(e.target.closest('.reels-btn') || e.target.closest('.reels-dot') ||
-       e.target.closest('.reels-sound')) return;
-    const v = videos[cur];
-    if(!v) return;
-    if(v.muted && userWantsSound){
-      v.muted = false;
-      if(v.paused) v.play().catch(() => {});
-      updateSoundIcon();
-      syncSongWithReel();
-      return;
-    }
-    if(v.paused) v.play().catch(() => {});
-    else v.pause();
-  });
-
-  let touchStartX = 0, touchStartY = 0, dragging = false;
-  viewport.addEventListener('touchstart', e => {
-    if(e.touches.length !== 1) return;
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-    dragging = true;
-  }, { passive: true });
-  viewport.addEventListener('touchend', e => {
-    if(!dragging) return;
-    dragging = false;
-    const t = e.changedTouches[0];
-    const dx = t.clientX - touchStartX;
-    const dy = t.clientY - touchStartY;
-    if(Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
-    if(dx < 0) goTo(cur + 1);
-    else goTo(cur - 1);
-  }, { passive: true });
-
-  addEventListener('keydown', e => {
-    if($('main').classList.contains('hidden')) return;
-    if(document.activeElement && ['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
-    const r = viewport.getBoundingClientRect();
-    const visible = r.bottom > 0 && r.top < innerHeight;
-    if(!visible) return;
-    if(e.key === 'ArrowLeft')  { e.preventDefault(); goTo(cur - 1); }
-    if(e.key === 'ArrowRight') { e.preventDefault(); goTo(cur + 1); }
-  });
-
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      const v = videos[cur];
-      if(!v) return;
-      if(en.isIntersecting){ tryPlay(v); }
-      else { v.pause(); }
-      setTimeout(() => { syncSongWithReel(); updateSoundIcon(); }, 50);
-    });
-  }, { threshold: 0.35 });
-  io.observe(viewport);
-
-  videos.forEach((v, idx) => {
-    v.addEventListener('play',   () => { if(idx === cur){ syncSongWithReel(); updateSoundIcon(); } });
-    v.addEventListener('pause',  () => { if(idx === cur){ syncSongWithReel(); updateSoundIcon(); } });
-    v.addEventListener('ended',  () => { if(idx === cur){ syncSongWithReel(); updateSoundIcon(); } });
-    v.addEventListener('volumechange', () => { if(idx === cur) updateSoundIcon(); });
-    v.addEventListener('timeupdate',   () => { if(idx === cur) updateProgress(); });
-    v.addEventListener('loadedmetadata', () => { if(idx === cur) updateProgress(); });
-    v.addEventListener('seeked', () => { if(idx === cur) updateProgress(); });
-  });
-
-  updateSoundIcon();
-  goTo(0);
-}
-
-function initMilestone(){
-  const target = new Date(MILESTONE_DATE).getTime();
-  const dEl = $('msDays'), hEl = $('msHours'), mEl = $('msMins'), sEl = $('msSecs');
-  const pad2 = n => String(n).padStart(2, '0');
-  function update(){
-    const diff = target - Date.now();
-    if(diff <= 0){
-      dEl.textContent = '00'; hEl.textContent = '00';
-      mEl.textContent = '00'; sEl.textContent = '00';
-      $('milestoneNote').textContent = "it's here. happy, happy birthday, riya 💜";
-      return;
-    }
-    const total = Math.floor(diff / 1000);
-    dEl.textContent = pad2(Math.floor(total / 86400));
-    hEl.textContent = pad2(Math.floor((total % 86400) / 3600));
-    mEl.textContent = pad2(Math.floor((total % 3600) / 60));
-    sEl.textContent = pad2(total % 60);
-  }
-  update();
-  setInterval(update, 1000);
-}
-
-function initCake(){
-  $('cakeWrap').addEventListener('click', () => {
-    const cake = $('cake');
-    const out = cake.classList.toggle('out');
-    const r = cake.getBoundingClientRect();
-    if(out){
-      SFX.blow(); haptic(30);
-      puffSmoke();
-      $('wishText').textContent = (CONFIG.cake && CONFIG.cake.blowText) || 'wish locked in ✨';
-      Confetti.burst(150, innerWidth/2, r.top, {heartsOnly:true});
-      emojiBurst(r.left + r.width/2, r.top + 20, 26, 190, ['💜','💙','✦','✨','🌙']);
-    } else {
-      SFX.tap();
-      $('wishText').textContent = (CONFIG.cake && CONFIG.cake.relightText) || 'lit again ✨';
-    }
-  });
-}
-function puffSmoke(){
-  document.querySelectorAll('.candle').forEach((c, i) => {
-    for(let k = 0; k < 3; k++){
-      const s = document.createElement('span');
-      s.className = 'smoke';
-      s.style.animationDelay = (k * 0.14 + i * 0.06) + 's';
-      c.appendChild(s);
-      setTimeout(() => s.remove(), 2000);
-    }
-  });
-}
-
-function emojiBurst(x, y, count, spread, pool){
-  if(reduceMotion) return;
-  const glyphs = pool || ['💜','💙','✦','✨','🌙','💫'];
-  for(let i = 0; i < count; i++){
-    const el = document.createElement('span');
-    el.className = 'pop';
-    el.textContent = glyphs[(Math.random() * glyphs.length) | 0];
-    const a = Math.random() * Math.PI * 2;
-    const d = spread * 0.45 + Math.random() * spread * 0.55;
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
-    el.style.fontSize = rand(14, 30) + 'px';
-    el.style.setProperty('--dx', Math.cos(a) * d + 'px');
-    el.style.setProperty('--dy', (Math.sin(a) * d - 30) + 'px');
-    el.style.setProperty('--rot', rand(-45, 45) + 'deg');
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 1100);
-  }
-}
-function hugBurst(x, y){
-  emojiBurst(x, y, 18, 180, ['🫂','💜','💙','💫','✦','✨']);
-}
-function launchBalloons(){
-  if(reduceMotion) return;
-  const cols = ['#7c6cf0','#a99cff','#6ba3ff','#ffd89b'];
-  for(let i = 0; i < 4; i++){
-    const b = document.createElement('div');
-    b.className = 'petal';
-    b.style.left = rand(5, 95) + 'vw';
-    b.style.width = '22px'; b.style.height = '26px';
-    b.style.background = 'radial-gradient(circle at 32% 28%, #fff6, ' + cols[(Math.random() * cols.length) | 0] + ')';
-    b.style.borderRadius = '50% 50% 50% 50% / 60% 60% 40% 40%';
-    b.style.animationDuration = rand(6, 10) + 's';
-    b.style.setProperty('--sway', rand(-30, 30) + 'px');
-    document.body.appendChild(b);
-    setTimeout(() => b.remove(), 11000);
-  }
-}
-
-document.addEventListener('pointerdown', e => {
-  if(interactive && !e.target.closest('#music-player') && !e.target.closest('.scratch-canvas') &&
-     !e.target.closest('.reels-viewport') && !e.target.closest('.game-frame'))
-    emojiBurst(e.clientX, e.clientY, 4, 60);
-});
-if(matchMedia('(hover: hover) and (pointer: fine)').matches){
-  let last = 0;
-  document.addEventListener('mousemove', e => {
-    if(!interactive) return;
-    const n = performance.now();
-    if(n - last < 80) return;
-    last = n;
-    const t = document.createElement('span');
-    t.className = 'trail';
-    t.textContent = Math.random() < 0.6 ? '✦' : '✧';
-    t.style.left = e.clientX + 'px';
-    t.style.top = e.clientY + 'px';
-    t.style.color = Math.random() < 0.5 ? '#a99cff' : '#ffd89b';
-    document.body.appendChild(t);
-    setTimeout(() => t.remove(), 900);
-  });
-}
-
-function startSong(){
-  const go = () => {
-    const t = (isFinite(song.duration) && song.duration > SONG_START + 5) ? SONG_START : 0;
-    try{ song.currentTime = t; }catch(e){}
-    song.play().catch(() => {});
-  };
-  if(song.readyState >= 1) go();
-  else {
-    song.addEventListener('loadedmetadata', go, {once:true});
-    song.load();
-    song.play().catch(() => {});
-  }
-}
-(function(){
-  const b = $('music-player');
-  const sync = () => b.classList.toggle('playing', !song.paused);
-  b.addEventListener('click', () => {
-    if(song.paused){
-      userPausedSong = false;
-      song.play().catch(() => {});
-    } else {
-      userPausedSong = true;
-      song.pause();
-    }
-    setTimeout(sync, 60);
-  });
-  song.addEventListener('play', sync);
-  song.addEventListener('pause', sync);
-  sync();
-})();
-
-function initReveal(){
   const io = new IntersectionObserver(entries => {
     entries.forEach(en => {
       if(!en.isIntersecting) return;
-      en.target.classList.add('in-view');
-      io.unobserve(en.target);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        if(!painted || !started) paintFoil();
+      }));
+      io.disconnect();
     });
-  }, { threshold: 0, rootMargin: '0px 0px -6% 0px' });
-  document.querySelectorAll('.reveal, .tl-item').forEach(el => io.observe(el));
+  }, { threshold: 0.15 });
+  io.observe(inner);
+
+  addEventListener('resize', () => { if(!started && !done) paintFoil(); }, { passive: true });
 }
 
-const dots = document.querySelectorAll('.dot');
-const refresh = () => dots.forEach((d, i) => d.classList.toggle('filled', i < entered.length));
+/* ═══════════════════════════════════════════════════════════════════════
+   REELS
+   ═══════════════════════════════════════════════════════════════════════ */
+function buildReels(){
+  const track = $('reelsTrack');
+  const dotsBox = $('reelsDots');
+  const capEl = $('reelsCaption');
+  const fill = $('reelsProgressFill');
+  const prev = $('reelsPrev');
+  const next = $('reelsNext');
+  const snd = $('reelsSound');
+  const vp = $('reelsViewport');
+  if(!track || !dotsBox) return;
 
-function tryUnlock(){
-  if(entered === PIN){
-    SFX.success(); haptic([30, 60, 30]);
-    const lock = $('lock');
-    lock.style.transition = 'opacity .6s ease, transform .6s ease';
-    lock.style.opacity = '0';
-    lock.style.transform = 'scale(1.04)';
-    setTimeout(() => {
-      lock.classList.add('hidden');
-      revealMain();
-    }, 550);
-  } else {
-    SFX.whoosh(); haptic(80);
-    $('lockError').textContent = (CONFIG.pinLock && CONFIG.pinLock.errorMsg) || 'try again';
-    $('lockCard').classList.add('shake');
-    setTimeout(() => {
-      $('lockCard').classList.remove('shake');
-      entered = ''; refresh();
-      $('lockError').textContent = '';
-    }, 620);
+  const items = ((CONFIG.reels && CONFIG.reels.items) || []).slice();
+  if(!items.length) items.push({ src: '', caption: '', poster: '' });
+
+  const slides = [];
+  let cur = 0, soundOn = false;
+
+  function placeholderHTML(){
+    return '<div class="reel-placeholder">' +
+      '<div class="reel-ph-emoji">🎬</div>' +
+      '<div class="reel-ph-text">a little moment<br>coming soon</div>' +
+      '<div class="reel-ph-hint">add your video to bring this to life</div>' +
+    '</div>';
   }
-}
-function pressKey(k){
-  if(k === 'clear'){ entered = ''; refresh(); SFX.tap(); return; }
-  if(k === 'back'){ entered = entered.slice(0, -1); refresh(); SFX.tap(); return; }
-  if(entered.length < 4){
-    entered += k; refresh(); SFX.tap(); haptic(8);
-    if(entered.length === 4){
-      song.play().then(() => song.pause()).catch(() => {});
-      setTimeout(tryUnlock, 160);
+
+  items.forEach((it, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'reel-slide' + (i === 0 ? ' active' : '');
+
+    if(it.src){
+      const v = document.createElement('video');
+      v.src = it.src;
+      v.loop = true;
+      v.muted = true;
+      v.playsInline = true;
+      v.setAttribute('playsinline', '');
+      v.setAttribute('webkit-playsinline', '');
+      v.setAttribute('preload', 'metadata');
+      if(it.poster) v.poster = it.poster;
+
+      v.addEventListener('error', () => {
+        if(v.parentNode) v.remove();
+        slide.insertAdjacentHTML('beforeend', placeholderHTML());
+      });
+      v.addEventListener('timeupdate', () => {
+        if(slides[cur] !== slide || !v.duration) return;
+        fill.style.width = ((v.currentTime / v.duration) * 100).toFixed(2) + '%';
+      });
+
+      slide.appendChild(v);
+    } else {
+      slide.innerHTML = placeholderHTML();
+    }
+
+    track.appendChild(slide);
+    slides.push(slide);
+
+    const d = document.createElement('button');
+    d.className = 'reels-dot' + (i === 0 ? ' active' : '');
+    d.type = 'button';
+    d.setAttribute('aria-label', 'reel ' + (i + 1));
+    d.addEventListener('click', () => go(i));
+    dotsBox.appendChild(d);
+  });
+
+  function updateBtns(){
+    if(prev) prev.disabled = cur === 0;
+    if(next) next.disabled = cur === slides.length - 1;
+  }
+
+  function pauseOthers(){
+    slides.forEach((s, k) => {
+      if(k === cur) return;
+      const v = s.querySelector('video');
+      if(v && !v.paused) v.pause();
+    });
+  }
+
+  function playCurrent(){
+    const v = slides[cur].querySelector('video');
+    if(!v){
+      fill.style.width = '100%';
+      return;
+    }
+    v.muted = !soundOn;
+    fill.style.width = '0%';
+    const p = v.play();
+    if(p && p.catch){
+      p.catch(() => {
+        if(soundOn && snd) snd.classList.add('blocked');
+      });
     }
   }
-}
-$('keypad').addEventListener('click', e => {
-  const b = e.target.closest('button');
-  if(!b) return;
-  const r = b.getBoundingClientRect();
-  const rip = document.createElement('span');
-  rip.className = 'ripple';
-  rip.style.left = (e.clientX ? e.clientX - r.left : r.width/2) + 'px';
-  rip.style.top  = (e.clientY ? e.clientY - r.top  : r.height/2) + 'px';
-  b.appendChild(rip);
-  setTimeout(() => rip.remove(), 600);
-  if(b.id === 'clearBtn') return pressKey('clear');
-  if(b.id === 'backBtn')  return pressKey('back');
-  if(b.dataset.k !== undefined) pressKey(b.dataset.k);
-});
-addEventListener('keydown', e => {
-  if(!$('lock').classList.contains('hidden')){
-    if(/^[0-9]$/.test(e.key)){
-      if(entered.length < 4){
-        entered += e.key; refresh(); SFX.tap();
-        if(entered.length === 4){
-          song.play().then(() => song.pause()).catch(()=>{});
-          setTimeout(tryUnlock, 160);
-        }
+
+  function go(i){
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    if(i === cur) return;
+    cur = i;
+    slides.forEach((s, k) => s.classList.toggle('active', k === cur));
+    [...dotsBox.children].forEach((d, k) => d.classList.toggle('active', k === cur));
+    capEl.textContent = items[cur].caption || '';
+    pauseOthers();
+    playCurrent();
+    updateBtns();
+    SFX.tap(); haptic(8);
+  }
+
+  if(prev) prev.addEventListener('click', () => go(cur - 1));
+  if(next) next.addEventListener('click', () => go(cur + 1));
+
+  if(snd){
+    snd.textContent = '🔇';
+    snd.addEventListener('click', () => {
+      soundOn = !soundOn;
+      snd.textContent = soundOn ? '🔊' : '🔇';
+      snd.classList.remove('blocked');
+      slides.forEach(s => {
+        const v = s.querySelector('video');
+        if(v) v.muted = !soundOn;
+      });
+      playCurrent();
+      SFX.tap(); haptic(8);
+    });
+  }
+
+  /* swipe */
+  let sx = 0, sy = 0, tracking = false;
+  if(vp){
+    vp.addEventListener('touchstart', e => {
+      if(e.touches.length !== 1) return;
+      sx = e.touches[0].clientX;
+      sy = e.touches[0].clientY;
+      tracking = true;
+    }, { passive: true });
+
+    vp.addEventListener('touchend', e => {
+      if(!tracking) return;
+      tracking = false;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - sx;
+      const dy = t.clientY - sy;
+      if(Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4){
+        go(cur + (dx < 0 ? 1 : -1));
       }
-    }
-    else if(e.key === 'Backspace'){ entered = entered.slice(0, -1); refresh(); }
-    else if(e.key === 'Escape'){ entered = ''; refresh(); }
+    }, { passive: true });
   }
-});
 
-function revealMain(){
-  $('lock').classList.add('hidden');
-  $('main').classList.remove('hidden');
-  $('progress').classList.remove('hidden');
-  $('music-player').classList.remove('hidden');
-  interactive = true;
-  startSong();
+  /* keyboard */
+  document.addEventListener('keydown', e => {
+    if(!vp || !vp.getClientRects().length) return;
+    if(e.key === 'ArrowRight') go(cur + 1);
+    if(e.key === 'ArrowLeft')  go(cur - 1);
+  });
+
+  capEl.textContent = items[0].caption || '';
+  updateBtns();
+  const v0 = slides[0].querySelector('video');
+  if(v0){
+    fill.style.width = '0%';
+    const p = v0.play();
+    if(p && p.catch) p.catch(() => {});
+  } else {
+    fill.style.width = '100%';
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   LETTER
+   ═══════════════════════════════════════════════════════════════════════ */
+function openLetter(){
+  if(letterOpened) return;
+  letterOpened = true;
+
+  const zone = $('letterZone');
+  const env = $('envelope');
+  const card = $('letterCard');
+  if(!zone || !env || !card) return;
+
+  zone.classList.add('show');
+
+  setTimeout(() => {
+    env.classList.add('open');
+    SFX.whoosh();
+
+    const er = env.getBoundingClientRect();
+    emojiBurst(er.left + er.width / 2, er.top + 40, 20, 150, ['💌','💜','💫','✦']);
+    Confetti.burst(120, innerWidth / 2, innerHeight * 0.25, { heartsOnly: true });
+    launchBalloons();
+    if(!balloonTimer) balloonTimer = setInterval(launchBalloons, 6000);
+
+    card.classList.add('in-view');
+
+    const paras = card.querySelectorAll('.letter-body p');
+    const step = IS_MOBILE() ? 200 : 300;
+    paras.forEach((p, i) => setTimeout(() => p.classList.add('in-view'), 350 + i * step));
+
+    const after = 350 + paras.length * step;
+    setTimeout(() => {
+      const sign = card.querySelector('.letter-sign');
+      if(sign) sign.classList.add('in-view');
+    }, after + 150);
+    setTimeout(() => {
+      const kb = $('kissBtn');
+      if(kb) kb.classList.add('in-view');
+    }, after + 380);
+  }, 500);
+}
+
+function initLetterObserver(){
+  const zone = $('letterZone');
+  if(!zone) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if(en.isIntersecting){ openLetter(); io.disconnect(); }
+    });
+  }, { threshold: 0.12 });
+  io.observe(zone);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   KISS BUTTON
+   ═══════════════════════════════════════════════════════════════════════ */
+(function initKiss(){
+  const btn = $('kissBtn');
+  if(!btn) return;
+  btn.addEventListener('click', e => {
+    SFX.kiss(); haptic(20);
+    const r = btn.getBoundingClientRect();
+    emojiBurst(r.left + r.width / 2, r.top, 18, 150, ['💋','💜','💌','✨','💫']);
+    Confetti.burst(90, r.left + r.width / 2, r.top, { heartsOnly: true });
+    launchBalloons(6);
+    if(e && e.clientX !== undefined) emojiBurst(e.clientX, e.clientY, 8, 80, ['💜','✨']);
+  });
+})();
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CAKE
+   ═══════════════════════════════════════════════════════════════════════ */
+function initCake(){
+  const wrap = $('cakeWrap');
+  const cake = $('cake');
+  const text = $('wishText');
+  if(!wrap || !cake || !text) return;
+  const cfg = CONFIG.cake || {};
+  let out = false;
+
+  wrap.addEventListener('click', () => {
+    const flames = cake.querySelectorAll('.flame');
+    if(!out){
+      out = true;
+      cake.classList.add('out');
+      flames.forEach(f => {
+        const s = document.createElement('div');
+        s.className = 'smoke';
+        f.parentNode.appendChild(s);
+        setTimeout(() => s.remove(), 1800);
+      });
+      text.textContent = cfg.blowText || 'wish locked in ✨';
+      SFX.blow(); haptic(30);
+      Confetti.burst(120, innerWidth / 2, innerHeight * 0.4, { heartsOnly: true });
+      const r = cake.getBoundingClientRect();
+      emojiBurst(r.left + r.width / 2, r.top + 10, 16, 140, ['✨','🎂','💜','🎉']);
+    } else {
+      out = false;
+      cake.classList.remove('out');
+      text.textContent = cfg.relightText || 'lit again ✨ make another wish';
+      SFX.ding();
+      haptic(15);
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MILESTONE COUNTDOWN
+   ═══════════════════════════════════════════════════════════════════════ */
+function startMilestone(){
+  const d = $('msDays'), h = $('msHours'), m = $('msMins'), s = $('msSecs');
+  const note = $('milestoneNote');
+  if(!d) return;
+  const target = MILESTONE_DATE ? new Date(MILESTONE_DATE).getTime() : NaN;
+
+  function pad(n){ return String(n).padStart(2, '0'); }
+  function setNum(el, v){
+    const val = pad(v);
+    if(el.textContent === val) return;
+    el.textContent = val;
+    el.classList.remove('tick');
+    void el.offsetWidth;
+    el.classList.add('tick');
+  }
+
+  function tick(){
+    if(Number.isNaN(target)){ d.textContent = h.textContent = m.textContent = s.textContent = '00'; return; }
+    let diff = target - Date.now();
+    if(diff <= 0){
+      d.textContent = h.textContent = m.textContent = s.textContent = '00';
+      if(note) note.textContent = 'it\'s today — happy birthday, riya! 🎉';
+      return;
+    }
+    const dd = Math.floor(diff / 86400000); diff -= dd * 86400000;
+    const hh = Math.floor(diff / 3600000);  diff -= hh * 3600000;
+    const mm = Math.floor(diff / 60000);    diff -= mm * 60000;
+    const ss = Math.floor(diff / 1000);
+    setNum(d, dd); setNum(h, hh); setNum(m, mm); setNum(s, ss);
+  }
+
+  tick();
+  if(msTimer) clearInterval(msTimer);
+  msTimer = setInterval(tick, 1000);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PROGRESS BAR + PARALLAX
+   ═══════════════════════════════════════════════════════════════════════ */
+function startProgress(){
+  const bar = $('progress');
+  if(!bar) return;
+  let ticking = false;
+  function update(){
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+    bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    ticking = false;
+  }
+  addEventListener('scroll', () => {
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
+  update();
+}
+
+function startParallax(){
+  if(reduceMotion) return;
+  let raf = null, tx = 0, ty = 0;
+  function apply(){
+    document.documentElement.style.setProperty('--mx', tx.toFixed(1) + 'px');
+    document.documentElement.style.setProperty('--my', ty.toFixed(1) + 'px');
+    raf = null;
+  }
+  addEventListener('pointermove', e => {
+    tx = (e.clientX / innerWidth - 0.5) * 22;
+    ty = (e.clientY / innerHeight - 0.5) * 16;
+    if(!raf) raf = requestAnimationFrame(apply);
+  }, { passive: true });
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   REVEAL OBSERVER
+   ═══════════════════════════════════════════════════════════════════════ */
+function initReveals(){
+  const els = document.querySelectorAll('.reveal, .tl-item');
+  if(reduceMotion || !('IntersectionObserver' in window)){
+    els.forEach(el => el.classList.add('in-view'));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if(en.isIntersecting){
+        en.target.classList.add('in-view');
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  els.forEach(el => io.observe(el));
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MUSIC
+   ═══════════════════════════════════════════════════════════════════════ */
+function initMusic(){
+  const btn = $('music-player');
+  if(!btn || !song) return;
+
+  function markPlaying(on){ btn.classList.toggle('playing', !!on); }
+
+  btn.addEventListener('click', () => {
+    if(song.paused){
+      const p = song.play();
+      if(p && p.catch) p.catch(() => {});
+    } else {
+      song.pause();
+    }
+    haptic(8);
+  });
+
+  song.addEventListener('play', () => markPlaying(true));
+  song.addEventListener('pause', () => markPlaying(false));
+
+  let startApplied = false;
+  function applyStart(){
+    if(startApplied || !SONG_START) return;
+    try {
+      if(isFinite(song.duration) && song.duration > SONG_START){
+        song.currentTime = SONG_START;
+        startApplied = true;
+      }
+    } catch(e){}
+  }
+  song.addEventListener('loadedmetadata', applyStart);
+  song.addEventListener('play', applyStart);
+}
+
+function tryPlaySong(){
+  if(!song) return;
+  song.volume = 0.55;
+  const p = song.play();
+  if(p && p.catch) p.catch(() => { /* autoplay blocked — user can tap the vinyl */ });
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TIME LOCK
+   ═══════════════════════════════════════════════════════════════════════ */
+function setNumTick(el, value){
+  const val = String(value).padStart(2, '0');
+  if(!el || el.textContent === val) return;
+  el.textContent = val;
+  el.classList.remove('tick');
+  void el.offsetWidth;
+  el.classList.add('tick');
+}
+
+function finishTimeLock(){
+  if(tlTimer){ clearInterval(tlTimer); tlTimer = null; }
+  const tl = $('timeLock');
+  if(tl && !tl.classList.contains('hidden')){
+    tl.classList.add('fade-out');
+    setTimeout(() => {
+      tl.classList.add('hidden');
+      tl.classList.remove('fade-out');
+    }, 620);
+  } else if(tl){
+    tl.classList.add('hidden');
+  }
+  showPinLock();
+}
+
+function startTimeLock(){
+  const tl = $('timeLock');
+  if(!tl) { showPinLock(); return; }
+
+  const target = LAUNCH_DATE ? new Date(LAUNCH_DATE).getTime() : NaN;
+  const bypass = !!(CONFIG.settings && CONFIG.settings.testBypassEnabled)
+    || /[?&#](test|preview|skip)/.test(location.href);
+
+  if(bypass || Number.isNaN(target) || Date.now() >= target){
+    finishTimeLock();
+    return;
+  }
+
+  const els = { d: $('cdDays'), h: $('cdHours'), m: $('cdMins'), s: $('cdSecs') };
+  const bar = $('tlProgress');
+  const began = Date.now();
+
+  function tick(){
+    const now = Date.now();
+    let diff = target - now;
+    if(diff <= 0){ finishTimeLock(); return; }
+
+    const dd = Math.floor(diff / 86400000); diff -= dd * 86400000;
+    const hh = Math.floor(diff / 3600000);  diff -= hh * 3600000;
+    const mm = Math.floor(diff / 60000);    diff -= mm * 60000;
+    const ss = Math.floor(diff / 1000);
+
+    setNumTick(els.d, dd);
+    setNumTick(els.h, hh);
+    setNumTick(els.m, mm);
+    setNumTick(els.s, ss);
+
+    if(bar){
+      const span = target - began;
+      const pct = span > 0 ? ((now - began) / span) * 100 : 100;
+      bar.style.width = Math.min(100, Math.max(0, pct)).toFixed(2) + '%';
+    }
+  }
+
+  tick();
+  tlTimer = setInterval(tick, 1000);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PIN LOCK
+   ═══════════════════════════════════════════════════════════════════════ */
+function showPinLock(){
+  const lock = $('lock');
+  if(!lock) return;
+  lock.classList.remove('hidden');
+}
+
+function initPinLock(){
+  const lock = $('lock');
+  const card = $('lockCard');
+  const dots = $('dots');
+  const errEl = $('lockError');
+  if(!lock || !dots) return;
+
+  let entry = '';
+  const errorMsg = (CONFIG.pinLock && CONFIG.pinLock.errorMsg) || 'not quite, bestie — try again';
+
+  function paintDots(){
+    [...dots.children].forEach((d, i) => d.classList.toggle('filled', i < entry.length));
+  }
+
+  function ripple(btn, e){
+    const r = document.createElement('span');
+    r.className = 'ripple';
+    const rect = btn.getBoundingClientRect();
+    const x = (e && e.clientX ? e.clientX : rect.left + rect.width / 2) - rect.left;
+    const y = (e && e.clientY ? e.clientY : rect.top + rect.height / 2) - rect.top;
+    r.style.left = x + 'px';
+    r.style.top = y + 'px';
+    btn.appendChild(r);
+    setTimeout(() => r.remove(), 600);
+  }
+
+  function reset(){
+    entry = '';
+    paintDots();
+  }
+
+  function submit(){
+    if(entry === PIN){
+      SFX.success();
+      haptic(25);
+      setTimeout(enterSite, 180);
+    } else {
+      SFX.buzz();
+      haptic(70);
+      if(errEl) errEl.textContent = errorMsg;
+      if(card){
+        card.classList.remove('shake');
+        void card.offsetWidth;
+        card.classList.add('shake');
+      }
+      setTimeout(reset, 480);
+      setTimeout(() => { if(errEl) errEl.textContent = ''; }, 2200);
+    }
+  }
+
+  function press(k){
+    if(entry.length >= 4) return;
+    entry += k;
+    paintDots();
+    SFX.tap();
+    haptic(8);
+    if(entry.length === 4) setTimeout(submit, 170);
+  }
+
+  document.querySelectorAll('.key[data-k]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      ripple(btn, e);
+      press(btn.dataset.k);
+    });
+  });
+
+  const clearBtn = $('clearBtn');
+  if(clearBtn) clearBtn.addEventListener('click', () => { reset(); SFX.tap(); haptic(6); });
+
+  const backBtn = $('backBtn');
+  if(backBtn) backBtn.addEventListener('click', () => {
+    if(!entry) return;
+    entry = entry.slice(0, -1);
+    paintDots();
+    SFX.tap(); haptic(6);
+  });
+
+  document.addEventListener('keydown', e => {
+    if(lock.classList.contains('hidden')) return;
+    if(/^[0-9]$/.test(e.key)) press(e.key);
+    else if(e.key === 'Backspace'){ entry = entry.slice(0, -1); paintDots(); }
+    else if(e.key === 'Escape'){ reset(); }
+  });
+
+  paintDots();
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ENTER THE SITE
+   ═══════════════════════════════════════════════════════════════════════ */
+let siteEntered = false;
+function enterSite(){
+  if(siteEntered) return;
+  siteEntered = true;
+
+  const lock = $('lock');
+  const main = $('main');
+  const mp = $('music-player');
+  const pr = $('progress');
+
+  if(lock) lock.classList.add('hidden');
+  if(main) main.classList.remove('hidden');
+  if(mp) mp.classList.remove('hidden');
+  if(pr) pr.classList.remove('hidden');
+
+  document.body.style.overflowX = 'clip';
+
+  initReveals();
+  initScratch();
+  initFaceReveal();
+  initLetterObserver();
+  startMilestone();
+  startProgress();
+  startParallax();
+  tryPlaySong();
+
+  setTimeout(startTyping, 500);
+  setTimeout(() => {
+    Confetti.burst(170, innerWidth / 2, innerHeight * 0.3, { heartsOnly: true });
+    launchBalloons();
+  }, 350);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   BOOT
+   ═══════════════════════════════════════════════════════════════════════ */
+async function boot(){
+  CONFIG = await loadConfig();
+  if(!CONFIG || typeof CONFIG !== 'object') CONFIG = {};
+
+  applyTheme(CONFIG.theme);
+
+  const s = CONFIG.settings || {};
+  PIN           = s.pin !== undefined ? String(s.pin) : '1911';
+  SONG_START    = Number(s.songStart) || 0;
+  LAUNCH_DATE   = s.launchDate || '';
+  MILESTONE_DATE = s.milestoneDate || '';
+
+  if(s.songFile && song) song.src = s.songFile;
+
+  applyText(document);
+
+  buildHeroTitle(s.recipientName || (CONFIG.hero && CONFIG.hero.title) || 'Riya');
+  buildTicker();
   buildTimeline();
   buildOpenWhen();
   buildCoupons();
   buildQuiz();
   buildReasons();
   buildReels();
+
   initCake();
-  initScratch();
-  initMilestone();
-  initGameFullscreen();
-  initReveal();
-  updateProgress();
-  Confetti.burst(160, innerWidth/2, innerHeight * 0.4, {heartsOnly:true});
-  emojiBurst(innerWidth/2, innerHeight/2, 30, 220);
+  initMusic();
+  initPinLock();
+
   Starfield.start();
-  const letterZone = $('letterZone');
-  const letterIO = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if(!en.isIntersecting) return;
-      if(!letterZone.classList.contains('show')) setTimeout(openLetter, 400);
-      letterIO.disconnect();
-    });
-  }, { threshold: 0.3 });
-  letterIO.observe(letterZone);
-  setTimeout(startTyping, 800);
+
+  startTimeLock();
 }
 
-function updateProgress(){
-  const h = document.documentElement.scrollHeight - innerHeight;
-  const pct = h > 0 ? Math.min(1, Math.max(0, scrollY / h)) : 0;
-  $('progress').style.transform = 'scaleX(' + pct + ')';
-}
-addEventListener('scroll', updateProgress, {passive:true});
-addEventListener('resize', updateProgress);
-
-(function(){
-  if(reduceMotion || IS_MOBILE()) return;
-  document.addEventListener('mousemove', e => {
-    if(!interactive) return;
-    const moon = document.querySelector('.hero-moon');
-    const glow = document.querySelector('.hero-glow');
-    const cx = (e.clientX / innerWidth - 0.5) * 2;
-    const cy = (e.clientY / innerHeight - 0.5) * 2;
-    if(moon){
-      moon.style.setProperty('--mx', (cx * 10).toFixed(1) + 'px');
-      moon.style.setProperty('--my', (cy * 8).toFixed(1) + 'px');
-    }
-    if(glow){
-      glow.style.setProperty('--mx', (cx * 22).toFixed(1) + 'px');
-      glow.style.setProperty('--my', (cy * 16).toFixed(1) + 'px');
-    }
-  }, {passive:true});
-})();
-
-function initTimeLock(){
-  const TARGET = new Date(LAUNCH_DATE).getTime();
-  const START  = new Date('2026-01-01T00:00:00+05:30').getTime();
-  const timeLock = $('timeLock');
-  const lockEl   = $('lock');
-  const dEl = $('cdDays'), hEl = $('cdHours'), mEl = $('cdMins'), sEl = $('cdSecs');
-  const progEl = $('tlProgress');
-  let interval = null;
-  const pad2 = n => String(n).padStart(2, '0');
-  function setNum(el, val){
-    const s = pad2(val);
-    if(el.textContent === s) return;
-    el.textContent = s;
-    el.classList.remove('tick');
-    void el.offsetWidth;
-    el.classList.add('tick');
-  }
-  function showPinLock(){
-    timeLock.classList.add('fade-out');
-    setTimeout(() => {
-      timeLock.classList.add('hidden');
-      timeLock.classList.remove('fade-out');
-      lockEl.classList.remove('hidden');
-      interactive = false;
-      try{ Confetti.burst(200, innerWidth/2, innerHeight*0.3, {heartsOnly:true}); }catch(e){}
-      try{ emojiBurst(innerWidth/2, innerHeight/2, 30, 220); }catch(e){}
-      try{ SFX.success(); }catch(e){}
-      haptic([30, 60, 30, 60, 30]);
-    }, 650);
-  }
-  function update(){
-    const now = Date.now();
-    const diff = TARGET - now;
-    if(diff <= 0){
-      if(interval){ clearInterval(interval); interval = null; }
-      showPinLock();
-      return;
-    }
-    const totalSec = Math.floor(diff / 1000);
-    setNum(dEl, Math.floor(totalSec / 86400));
-    setNum(hEl, Math.floor((totalSec % 86400) / 3600));
-    setNum(mEl, Math.floor((totalSec % 3600) / 60));
-    setNum(sEl, totalSec % 60);
-    const total = TARGET - START;
-    const pct = Math.max(0, Math.min(100, ((now - START) / total) * 100));
-    if(progEl) progEl.style.width = pct.toFixed(2) + '%';
-  }
-  const rawHash = (location.hash || '').toLowerCase().trim();
-  const BYPASS_ALL  = rawHash === '#letmein=all' || rawHash === '#letmein-all' || rawHash === '#skipall';
-  const BYPASS_TIME = BYPASS_ALL || rawHash === '#letmein' || rawHash === '#skip';
-  const useBypass = (CONFIG.settings.testBypassEnabled !== false) && BYPASS_TIME;
-
-  function toast(msg){
-    const t = document.createElement('div');
-    t.textContent = msg;
-    t.style.cssText =
-      'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);' +
-      'background:rgba(20,26,54,0.96);border:1px solid rgba(200,192,255,0.3);' +
-      'color:#f0f0ff;font:600 13px "Poppins",sans-serif;' +
-      'padding:10px 18px;border-radius:99px;z-index:9999;' +
-      'box-shadow:0 10px 30px rgba(0,0,0,0.55);pointer-events:none;' +
-      'opacity:0;transition:opacity .3s ease;';
-    document.body.appendChild(t);
-    requestAnimationFrame(() => t.style.opacity = '1');
-    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 400); }, 2800);
-  }
-
-  if(useBypass){
-    console.log('[test] time lock bypassed via URL hash');
-    timeLock.classList.add('hidden');
-    if(BYPASS_ALL){
-      console.log('[test] skipping PIN too');
-      toast('🧪 test mode: time + PIN bypassed');
-      revealMain();
-    } else {
-      toast('🧪 test mode: time lock skipped (PIN ' + PIN + ')');
-      lockEl.classList.remove('hidden');
-      interactive = false;
-      try{ Starfield.start(); }catch(e){}
-    }
-    return;
-  }
-  if(Date.now() >= TARGET){
-    timeLock.classList.add('hidden');
-    lockEl.classList.remove('hidden');
-  } else {
-    interactive = true;
-    update();
-    interval = setInterval(update, 1000);
-    try{ Starfield.start(); }catch(e){}
-  }
-}
-
-(async function boot(){
-  CONFIG = await loadConfig();
-  applyTheme(CONFIG.theme);
-  applyText(document);
-
-  if(CONFIG.settings){
-    PIN            = CONFIG.settings.pin || PIN;
-    SONG_START     = CONFIG.settings.songStart || 0;
-    LAUNCH_DATE    = CONFIG.settings.launchDate || LAUNCH_DATE;
-    MILESTONE_DATE = CONFIG.settings.milestoneDate || MILESTONE_DATE;
-    if(CONFIG.settings.songFile) song.src = CONFIG.settings.songFile;
-  }
-
-  if(CONFIG.game && CONFIG.game.creditUrl){
-    const a = $('gameCreditLink');
-    if(a) a.href = CONFIG.game.creditUrl;
-  }
-
-  buildHeroTitle((CONFIG.hero && CONFIG.hero.title) || 'Riya');
-  buildTicker();
-  initTimeLock();
-})();
+document.addEventListener('DOMContentLoaded', boot);
+if(document.readyState === 'interactive' || document.readyState === 'complete') boot();
 </script>
+
 </body>
 </html>
