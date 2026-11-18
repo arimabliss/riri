@@ -9,7 +9,7 @@
     "songStart": 70,
     "launchDate": "2026-11-19T00:00:00+05:30",
     "milestoneDate": "2026-11-19T00:00:00+05:30",
-    "testBypassEnabled": true
+    "testBypassEnabled": false
   },
 
   "theme": {
